@@ -1,160 +1,54 @@
 .Team {
   position: absolute;
-  width: var(--box-team-width);
-  height: var(--box-height);
-  left:0;
-  bottom: var(--champselect-margin-bot);
-
-  .TeamName {
-    font-size: 40px;
-    color: black;
-    font-family: 'Acumin Black', sans-serif;
-    margin-top: -15px;
-
-    &.WithoutCoaches {
-      font-size: 60px;
-      margin-top: -20px;
-    }
-  }
-
-  .CoachName {
-    font-size: 20px;
-    margin-top: -20px;
-  }
-
-  .TeamScore {
-    font-size: 60px;
-    margin-top: -20px;
-    color: white;
-    font-family: 'Acumin Black', sans-serif;
-    width: var(--box-ban-height);
-    text-align: center;
-    height: calc(100% + 23px);
-  }
+  top: 0;
+  height: var(--pb-h);
+  width: var(--pb-side-w);
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--side-pad-top);
+  box-sizing: border-box;
+  gap: var(--side-gap);
 
   @import "./picks";
   @import "./bans";
+}
 
-  &.TeamBlue {
-    right: calc(50% + calc(var(--box-width) / 2));
+.TeamBlue { left: 0; }
+.TeamRed  { right: 0; }
 
-    .TeamScore {
-      border-right: none;
-    }
-    .BansContainer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-  
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: stretch;
-  
-      padding-left: 49px;
-      padding-right: 0;
-      box-sizing: border-box;
-    }
-    // .Bans {
-    //   // justify-content: flex-end;
-    //   background-color: transparent;
-    //   border: none;
-    //   // left: 410px;
-    //   // left: 0;
-    //   // transform: translateY(-40px);
+.Picks {
+  width: 100%;
+  height: var(--pick-h);
+  display: flex;
+  gap: var(--pick-gap);
+  flex: 0 0 var(--pick-h);
+  overflow: hidden;
+}
 
-    //   .Ban {
-    //     border-left: solid transparent var(--border-width);
+.Pick {
+  flex: 1 1 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
 
-    //     .BanImage.Active::before {
-    //       background-image: linear-gradient(to left, var(--color-blue) 0%, rgba(0, 0, 0, 0) 50%, var(--color-blue) 100%);
-    //     }
-    //   }
-    // }
+.PickImage {
+  position: absolute;
+  inset: 0;
 
-    .Picks {
-      .Pick {
-        .PickImage.Active::before {
-          background-image: linear-gradient(to left, var(--color-blue) 0%, rgba(0, 0, 0, 0) 50%, var(--color-blue) 100%);
-        }
-      }
-    }
-
-    .TeamName {
-      margin-right: auto;
-      margin-left: 15px;
-    }
-  }
-
-  &.TeamRed {
-    left: calc(50% + calc(var(--box-width) / 2));
-    
-
-    .TeamScore {
-      border-left: 3px solid transparent;
-    }
-
-    .BansContainer {
-      position: absolute;
-      top: 0;
-      left: 0;          // important: on ancre la ligne sur toute la largeur
-      right: 0;
-      width: 100%;
-  
-      display: flex;
-      flex-direction: row-reverse;   // ban1 côté droit
-      justify-content: flex-start;   // (row-reverse => flex-start = droite visuelle)
-      align-items: stretch;
-  
-      padding-right: 46px;           // ton X-top
-      padding-left: 0;
-      box-sizing: border-box;
-    }  
-    .BanSkewMask {
-      transform: skewX(-@banSkewAngle);
-    }
-  
-    .BanSkewMask img {
-      transform:
-        translate(-50%, -50%)
-        skewX(@banSkewAngle)
-        scaleX(@invCos);
-    }
-  
-    .BanSlot::before {
-      transform: skewX(-@banSkewAngle);
-    }
-    // .Bans {
-    //   background-color: transparent;
-    //   border: solid transparent var(--border-width);
-    //   // right: 410px;
-    //   // right: 0;
-    //   // transform: translateY(-48px);
-
-    //   .Ban {
-    //     border-right: solid transparent var(--border-width);
-
-    //     .BanImage.Active::before {
-    //       background-image: linear-gradient(to left, var(--color-red) 0%, rgba(0, 0, 0, 0) 50%, var(--color-red) 100%);
-    //     }
-    //   }
-    // }
-
-    .Picks {
-      .Pick {
-        .PickImage.Active::before {
-          background-image: linear-gradient(to left, var(--color-red) 0%, rgba(0, 0, 0, 0) 50%, var(--color-red) 100%);
-        }
-      }
-    }
-
-    .TeamName {
-      margin-left: auto;
-      text-align: right;
-      margin-right: 15px;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
   }
 }
 
+.Team .BansWrapper{
+  height: var(--bans-h);
+  flex: 0 0 var(--bans-h);
+}
+
+.TeamBlue{ left: 0; }
+.TeamRed{ right: 0; }

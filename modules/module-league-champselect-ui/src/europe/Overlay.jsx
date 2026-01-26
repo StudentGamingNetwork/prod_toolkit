@@ -43,25 +43,15 @@ export default class Overlay extends React.Component {
       this.setState({ currentAnimationState: css.TheAbsoluteVoid })
     }
 
-    const renderBans = (teamState) => {
-      const BAN_GAPS = [5, 7, 49, 7];
-      const list = [];
-      teamState.bans.forEach((ban, idx) => {
-        list.push(
+    const renderBans = (teamState) => (
+      <div className={cx(css.BansContainer)}>
+        {teamState.bans.map((ban, idx) => (
           <div key={`ban-slot-${idx}`} className={css.BanSlot}>
-            <div className={css.BanSkewMask}>
-              <Ban {...ban} />
-            </div>
+            <Ban {...ban} />
           </div>
-        );
-        if (idx < teamState.bans.length - 1) {
-          const w = BAN_GAPS[idx];
-          list.push(<div key={`ban-gap-${idx}`} className={css.BanGap} style={{ width: w }} />);
-        }
-      });
-      return <div className={cx(css.BansContainer)}>{list}</div>
-    };
-
+        ))}
+      </div>
+    );
     const renderTeam = (teamName, teamConfig, teamState) => (
       <div className={cx(css.Team, teamName)}>
         <div className={cx(css.Picks)}>
@@ -74,9 +64,9 @@ export default class Overlay extends React.Component {
             {teamName === css.TeamBlue && config.frontend.scoreEnabled && (
               <div className={css.TeamScore}>{teamConfig.score}</div>
             )}
-            {teamName === css.TeamBlue && renderBans(teamState)}
-            
-            {teamName === css.TeamRed && renderBans(teamState)}
+            <div className={cx(css.Bans, { [css.WithScore]: config.frontend.scoreEnabled })}>
+              {renderBans(teamState)}
+            </div>            
             {teamName === css.TeamRed && config.frontend.scoreEnabled && (
               <div className={css.TeamScore}>{teamConfig.score}</div>
             )}
@@ -100,6 +90,9 @@ export default class Overlay extends React.Component {
               {/* --------------------- */}
 
               <div className={cx(css.MiddleBox)}>
+                <div className={cx(css.CenterLogo)}>
+                  <img src="/pages/op-plugin-theming/active/logo.png" alt="" />
+                </div>                
                 <div className={cx(css.Patch)}>
                   {state.state}
                 </div>

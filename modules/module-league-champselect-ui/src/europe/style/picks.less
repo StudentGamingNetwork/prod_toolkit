@@ -30,249 +30,213 @@
 
 .Picks {
   width: 100%;
-  height: var(--box-pick-height);
+  height: var(--pick-h);
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  flex-direction: row;
+  gap: var(--pick-gap);
+  overflow: hidden;
+  padding: 0;
+}
+
+.Picks > .Pick {
+  position: relative;
+  flex: 1 1 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+/* Image plein cadre */
+.PickImage {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 
-  .Pick {
-    position: relative;
+  img {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    background-color: #0a0a0a;
-    // border: solid var(--border-between-color) 5px;
-    border: none;
-    border-top: none;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
 
-    transition: height 0.4s ease, transform 0.4s ease;
-    transform: scale(1);
-    overflow: hidden;
-  
-    // &:first-child{
-    //   border: solid var(--border-between-color) 5px;
-    // }
-
-    &.Active {
-      // height: 100%; // or whatever height you want
-      .PlayerName {
-        position: absolute;
-        bottom: -20px;
-        margin-top: calc(-1 * var(--pick-name-height));
-        line-height: calc(2 * var(--pick-name-height));
-        .textInfos{
-          position: absolute;
-          bottom: 0;
-          animation: open_player_text ease-in-out 0.5s forwards;
-          line-height: 0.9;
-          white-space: no-wrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          word-break: break-all;
-        }
-        .textInfos::after{
-          animation: open_player_text ease-in-out 0.5s backwards;
-        }
-      }
-      // animation: open_player ease-in-out 0.5s forwards;
-      // animation-delay: 1s;
-    }
-
-    .PlayerName {
-      position: absolute;
-      bottom: 10px;
-      text-transform: uppercase;
-      transition: height 1s, font-size 1s, margin-top 1s, background-color 0.3s, color 0.3s;
-      height: var(--pick-name-height);
-      color: white;
-      background-color: transparent;
-      text-align: center;
-      font-family: "Acumin Pro Condensed Black";
-      font-style: italic;
-      font-size: calc(0.8 * var(--pick-name-height));
-      line-height: var(--pick-name-height);
-      display: block;
-
-      .textInfos{
-        position: absolute;
-        width: 350px;
-        height: 30px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        word-wrap: break-word;
-        filter:drop-shadow(2px 2px 4px rgb(0,0,0))
-      }
-    }
-
-    .ChampionName{
-      position: absolute;
-      top:0;
-      text-transform: uppercase;
-      transition: height 1s, font-size 1s, margin-top 1s, background-color 0.3s, color 0.3s;
-      height: var(--pick-name-height);
-      color: white;
-      background-color: transparent;
-      text-align: center;
-      font-family: "Acumin Pro Condensed Black";
-      font-style: italic;
-      font-size: calc(0.5 * var(--pick-name-height));
-      line-height: var(--pick-name-height);
-      .textInfos{
-        width: 376px;
-        padding: 0 15px;
-        filter:drop-shadow(0px 0px 4px rgb(0,0,0))
-      }
-
-    }
-
-    .SummonerSpells {
-      position: absolute;
-      top: calc(var(--box-pick-height) - 30px - var(--summoner-spell-size));
-      right: 0;
-      z-index: 10;
-
-      img {
-        height: var(--summoner-spell-size);
-        width: var(--summoner-spell-size);
-      }
-    }
-
-    .PickImage {
-      position: relative;
-      height: 100% ;
-
-      img {
-        width: calc(100% + calc(2 * var(--pick-image-crop)));
-        height: 100%;
-        object-fit: cover;
-        object-position: calc(-1 * var(--pick-image-crop)) calc(-1 * var(--pick-image-crop));
-      }
-
-      &.Active::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        // height: calc(100% - var(--pick-name-height));
-        height: calc(100% + var(--pick-name-height));
-        opacity: 0.5;
-        animation: pulsate-pick 1.5s infinite;
-        transition: height 1s;
-
-        // z-index: 20;
-      }
-    }
+  &.Active::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    animation: pulsate-pick 1.5s infinite;
   }
 }
 
-&.TeamBlue .Picks .Pick {
-  &.Active {
-    .ChampionName,
-    .PlayerName {
-      background-color: rgba(0,0,0,0.2);
-      color: white;
-    }
-  }
-  .ChampionName,
-  .PlayerName{
-    text-align: right;
-  }
+/* (Option) cache tes overlays text si tu veux un rendu “clean bandeau” */
+// .ChampionName,
+// .PlayerName,
+// .SummonerSpells {
+//   display: none;
+// }
 
+/* Teinte active par côté (si tu veux garder) */
+.TeamBlue .PickImage.Active::before {
+  background-image: linear-gradient(to left, var(--color-blue) 0%, rgba(0,0,0,0) 50%, var(--color-blue) 100%);
 }
-&.TeamRed .Picks .Pick {
-  &.Active {
-    .ChampionName,
-    .PlayerName {
-      background-color: rgba(0,0,0,0.2);
-      color: white;
-      text-align: left;
-      margin-left: 5px;
-    }  
-  }
-    .ChampionName, 
-    .PlayerName {
-      text-align: left;
-      margin-left: 5px;  
-    }
+.TeamRed .PickImage.Active::before {
+  background-image: linear-gradient(to right, var(--color-red) 0%, rgba(0,0,0,0) 50%, var(--color-red) 100%);
 }
 
 @keyframes pulsate-pick {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}
-@keyframes open_player {
-  0%{
-      width: 100%;
-  }
-  100%{
-      width: 100%;
-  }
+  0% { opacity: 0.45; }
+  50% { opacity: 0.18; }
+  100% { opacity: 0.45; }
 }
 
-@keyframes close_player {
-  0%{
-      width: 100%;
-  }
-  100%{
-      width: 100%;
-  }
+
+/* ===== SAFE OVERRIDES: force l'affichage des picks ===== */
+.Picks {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100% !important;
+
+  /* force une hauteur visible */
+  height: var(--box-pick-height) !important;
+  min-height: var(--box-pick-height) !important;
+
+  overflow: hidden !important;
+  gap: var(--pick-gap) !important;
 }
 
-.animateIn {
-  animation: in 0.5s ease-out forwards;
+.Pick {
+  position: relative !important;
+  flex: 1 1 0 !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  overflow: hidden !important;
+  display: block !important;
 }
 
-.animateOut {
-  animation: out 0.5s ease-in forwards;
+/* L'image doit remplir le pick */
+.PickImage {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
 }
-/* =========================
-   PICKS — ABSOLUTE LAYOUT
-   Specs:
-   size: 376x120
-   start Y: 198
-   gaps: 6 / 6 / 36 / 6
-   ========================= */
 
-   .Picks {
-    position: absolute;
-    top: 198px;
-    left: 0;
-    width: 376px;
-    height: 654px; // 120*5 + (6+6+36+6) = 600 + 54
-    display: block; // override flex
-  }
-  
-  .TeamRed .Picks {
-    left: auto;
-    right: 0;
-  }
-  
-  /* Chaque Pick devient un “slot” absolu */
-  .Picks > .Pick {
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 376px;
-    height: 120px;
-  }
-  
-  .TeamRed .Picks > .Pick {
-    left: auto;
-    right: 0;
-  }
-  
-  /* Offsets Y relatifs au container .Picks */
-  .Picks > .Pick:nth-child(1) { top: 0px; }
-  .Picks > .Pick:nth-child(2) { top: 126px; } // 120 + 6
-  .Picks > .Pick:nth-child(3) { top: 252px; } // 2*(120+6)
-  .Picks > .Pick:nth-child(4) { top: 408px; } // 252 + 120 + 36
-  .Picks > .Pick:nth-child(5) { top: 534px; } // 408 + 120 + 6
+.PickImage img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* ===== TEXTES PICK ===== */
+
+.ChampionName,
+.PlayerName {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  z-index: 3;
+  pointer-events: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Nom du champion */
+.ChampionName {
+  bottom: 8px;
+  font-family: "Acumin Pro Condensed Black", sans-serif;
+  font-size: 15px;
+  line-height: 1;
+  color: white;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.8),
+    0 0 6px rgba(0,0,0,0.6);
+  z-index: 100;
+}
+
+/* Nom du joueur */
+.PlayerName {
+  bottom: 28px;
+  font-family: "Acumin Pro Condensed Black", sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  opacity: 0.9;
+  color: white;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.8);
+    z-index: 100;
+}
+
+.Pick::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.0)
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+.PickImage { z-index: 0; }
+
+
+/* ===== Force layers order (anti "je vois en DOM mais pas à l'écran") ===== */
+
+.Pick {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* couche image en dessous */
+.PickImage {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+}
+
+/* si tu as un overlay actif dans PickImage */
+.PickImage::before,
+.PickImage::after {
+  z-index: 2 !important;
+}
+
+/* gradient bas si tu l'utilises */
+.Pick::after {
+  z-index: 3 !important;
+}
+
+/* textes AU-DESSUS de tout */
+.ChampionName,
+.PlayerName {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  position: absolute !important;
+  left: 8px !important;
+  right: 8px !important;
+
+  z-index: 50 !important;   /* très haut pour passer au-dessus des overlays */
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  text-shadow: 0 1px 2px rgba(0,0,0,0.85);
+  pointer-events: none;
+}
+
+.PlayerName { bottom: 28px !important; font-size: 13px !important; }
+.ChampionName { bottom: 8px !important; font-size: 18px !important; }

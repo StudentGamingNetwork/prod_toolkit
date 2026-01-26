@@ -1,27 +1,56 @@
 :root {
+  /* === Legacy (utilisé partout dans tes less) === */
   --box-width: 1168px;
-  --box-height: calc(var(--box-pick-height) + var(--box-ban-height));
-  --box-logo-height: calc(100% - calc(var(--box-ban-height) + var(--box-patch-height)));
-  --box-timer-height: var(--box-ban-height);
-  --box-patch-height: 40px;
-
   --box-team-width: 376px;
   --box-team-height: 654px;
+
   --box-pick-height: 120px;
-  // --box-ban-height: 45px;
-  // --box-ban-spacer: calc(var(--box-ban-height) / 2);
+  --box-ban-height: 45px; /* ✅ IMPORTANT: il était commenté */
+  --box-height: calc(var(--box-pick-height) + var(--box-ban-height));
+
+  --box-patch-height: 40px;
+  // --box-logo-height: calc(100% - calc(var(--box-ban-height) + var(--box-patch-height)));
+  --box-timer-height: var(--box-ban-height);
 
   --pick-name-height: 30px;
   --pick-image-crop: 8px;
-
   --ban-image-crop: 2px;
   --summoner-spell-size: 40px;
 
-  --champselect-margin-bot: calc(134px - var(--box-ban-height));
+  --champselect-margin-bot: 0px; /* on le neutralise pour le bandeau top */
 
   --color-red: rgb(243, 31, 197);
   --color-blue: rgb(16, 186, 238);
 
   --border-between-color: white;
   --border-width: 8px;
+
+  /* === Nouveau layout 16:3 (bandeau haut) === */
+  --pb-h: 360px;
+  --pb-top: 0px;
+
+  /* Centre */
+  --pb-center-w: 150px;
+  --pb-side-w: calc((1920px - var(--pb-center-w)) / 2);
+
+  /* Nouveau: hauteur réelle des picks */
+  --pick-h: 270px;       /* 👈 clé, ajuste 250–290 */
+  --bans-h: 60px;        /* un peu plus confortable */
+  --side-pad-top: 10px;  /* padding vertical */
+  --side-gap: 8px;       /* gap entre picks et bans */
+
+  /* Picks */
+  --pick-gap: 2px;
+
+  /* Bans */
+  --ban-size: 46px;
+  --ban-gap: 2px;
+
+  --neutral: #e7d7b5;
+  --blueSide: #a77f28;
+  --redSide: #d70020;
+
+  /* option: ombres/traits */
+  --inkDark: #2d2e2e;
+  --panel-stroke: rgba(0,0,0,0.25);
 }

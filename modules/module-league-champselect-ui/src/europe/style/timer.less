@@ -3,36 +3,18 @@
 .Timer {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--pb-center-w);
+  height: var(--pb-h);
   z-index: 10;
-}
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.TimerTextMixin() {
-  font-family: 'Neue Haas Grotesk Display Pro 75 Bold', 'Arial', sans-serif;
-  font-weight: 700;
-  font-size: 42px;
-  line-height: 1;
-  text-align: center;
-  position: absolute;
-  
-  top: 60px; 
-  
-  width: 120px; 
-}
-
-.TimerLeft {
-  .TimerTextMixin();
-  color: #e2d2ac;
-  left: 50%;
-  margin-left: -280px;
-}
-
-.TimerRight {
-  .TimerTextMixin();
-  color: #e2d2ac;
-  left: 50%;
-  margin-left: 160px;
+  .TimerLeft,
+  .TimerRight {
+    display: none; /* tu peux réactiver selon ton design */
+  }
 }
