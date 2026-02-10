@@ -47,7 +47,7 @@ window.LPTE.onready(() => {
   window.LPTE.on(namespace, 'update', update)
 })
 
-function setBoImage(imgEl, side, score) {
+function setBo3Image(imgEl, side, score) {
   // side = "left" | "right"
   const file = `${side}_${score}.png`;
 
@@ -63,6 +63,24 @@ function setBoImage(imgEl, side, score) {
     imgEl.src = `../img/${side}_0.png`; // fallback
   };
 }
+
+function setBo5Image(imgEl, side, score) {
+  // side = "left" | "right"
+  const file = `${side}_${score}3.png`;
+
+  // même logique que tes logos: dossier img servi avec la page
+  const url = `../img/${file}`;
+
+  imgEl.src = url;
+
+  // debug utile si ça 404
+  imgEl.onerror = () => {
+    console.warn(`[BO IMG] not found: ${url}`);
+    imgEl.onerror = null;
+    imgEl.src = `../img/${side}_0.png`; // fallback
+  };
+}
+
 function setHasBo(rootEl, hasBo) {
   rootEl.dataset.hasBo = hasBo ? '1' : '0';
 }
@@ -84,8 +102,14 @@ function displayTeams(teams, bestOf) {
 
   // Images BO
   if (hasBo) {
-    setBoImage(blueBo, 'left', teams.blueTeam?.score ?? 0);
-    setBoImage(redBo, 'right', teams.redTeam?.score ?? 0);
+    if (bestOf > 3) {
+      setBo5Image(blueBo, 'left', teams.blueTeam?.score ?? 0);
+      setBo5Image(redBo, 'right', teams.redTeam?.score ?? 0);
+    }
+    else if (bestOf > 1) {
+      setBo3Image(blueBo, 'left', teams.blueTeam?.score ?? 0);
+      setBo3Image(redBo, 'right', teams.redTeam?.score ?? 0);
+    }
   }
 }const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
 

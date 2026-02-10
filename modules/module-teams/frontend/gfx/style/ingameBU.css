@@ -149,7 +149,7 @@
 .bo-crop{
   width: 50px;      /* largeur du bloc meta */
   height: 18px;     /* hauteur utile du contenu BO (à ajuster) */
-  overflow: hidden; /* <-- on coupe l’alpha autour */
+  /*overflow: hidden;  <-- on coupe l’alpha autour */
   display: flex;
   align-items: center;
   justify-content: center;

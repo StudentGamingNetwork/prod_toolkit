@@ -27,17 +27,37 @@ draft.src = `${location_draft}${apiKey !== null ? '?apikey=' + apiKey : ''}`
 
 
 // --- GESTION DES IMAGES BO ---
-function setBoImage(imgEl, side, score) {
+function setBo3Image(imgEl, side, score) {
   // side = "left" | "right"
   const file = `${side}_${score}.png`;
-  const url = `./img/${file}`; 
+
+  // même logique que tes logos: dossier img servi avec la page
+  const url = `../img/${file}`;
 
   imgEl.src = url;
 
-  // Fallback si l'image n'existe pas
+  // debug utile si ça 404
   imgEl.onerror = () => {
+    console.warn(`[BO IMG] not found: ${url}`);
     imgEl.onerror = null;
-    imgEl.src = `./img/${side}_0.png`; 
+    imgEl.src = `../img/${side}_0.png`; // fallback
+  };
+}
+
+function setBo5Image(imgEl, side, score) {
+  // side = "left" | "right"
+  const file = `${side}_${score}3.png`;
+
+  // même logique que tes logos: dossier img servi avec la page
+  const url = `../img/${file}`;
+
+  imgEl.src = url;
+
+  // debug utile si ça 404
+  imgEl.onerror = () => {
+    console.warn(`[BO IMG] not found: ${url}`);
+    imgEl.onerror = null;
+    imgEl.src = `../img/${side}_0.png`; // fallback
   };
 }
 
@@ -94,11 +114,17 @@ function displayTeams(teams, bestOf) {
   redLogo.src = `http://${server}/pages/op-module-teams/img/${teams.redTeam.logo}`
 
   // Affichage des carrés de BO (Best Of)
-  if (bestOf > 1) {
+  if (bestOf > 3) {
     blueScore.style.display = 'block'
     redScore.style.display = 'block'
-    setBoImage(blueScore, 'left', teams.blueTeam.score);
-    setBoImage(redScore, 'right', teams.redTeam.score);
+    setBo5Image(blueScore, 'left', teams.blueTeam.score);
+    setBo5Image(redScore, 'right', teams.redTeam.score);
+  } else if (bestOf > 1) {
+    blueScore.style.display = 'block'
+    redScore.style.display = 'block'
+    setBo3Image(blueScore, 'left', teams.blueTeam.score);
+    setBo3Image(redScore, 'right', teams.redTeam.score);
+
   } else {
     blueScore.style.display = 'none'
     redScore.style.display = 'none'
