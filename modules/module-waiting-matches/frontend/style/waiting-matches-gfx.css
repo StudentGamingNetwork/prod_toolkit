@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "Grotesk Compressed Extrabold";
+  src: url("./fonts/Kostic\ -\ Roc\ Grotesk\ Compressed\ ExtraBold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Canvas */
+html, body{
+  width:1920px;
+  height:1080px;
+  margin:0;
+  overflow:hidden;
+  background:transparent;
+}
+
+.gfx{
+  font-family: "Grotesk Compressed Extrabold", Helvetica, sans-serif;
+  color:#111;
+}
+
+/* Panel (à placer où tu veux) */
+.panel{
+  position:absolute;
+  left:1234px;   /* à ajuster */
+  top:94px;     /* à ajuster */
+  width:630px;  /* largeur d’un cartouche */
+}
+
+.panel__title{
+  display:none; /* si tu n’en veux pas, sinon enlève */
+}
+
+/* List */
+.matches{
+  display:flex;
+  flex-direction:column;
+  gap:44px; /* gap entre cartouches */
+}
+
+/* ===== MATCH ROW =====
+   Taille totale du cartouche (visuel inclus)
+   W = 630px, H = 113px
+*/
+.match{
+  width:612px;
+  height:113px;
+  box-sizing:border-box;
+  position:relative;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  /* si tu veux un fond temporaire pour debug */
+  /* background: rgba(255,255,255,0.85); */
+  /* border-radius: 16px; */
+}
+
+/* Logos: 100x100, centrés verticalement dans 113px */
+.match__logo{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  display:block;
+}
+
+/* Zone centrale: noms + mid */
+.match__center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0; /* pas de gap, on contrôle par widths */
+  height:113px;
+}
+
+/* ===== Blocks internes =====
+   - Name block: 175x94
+   - Mid block: 50x94
+*/
+.match__name{
+  width:175px;
+  height:94px;
+  box-sizing:border-box;
+
+  display:flex;
+  align-items:center;
+
+  font-weight:800;
+  font-size:45px; /* plus petit */
+  /* text-transform:uppercase; */
+  line-height:1.0;     /* compact pour tenir 2 lignes */
+  color:#1a1a1a;
+
+  white-space:normal;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* aligné côté logo */
+.match__name--left{
+  justify-content:flex-start;
+  text-align:left;
+  padding-left:12px;
+}
+
+.match__name--right{
+  justify-content:flex-end;
+  text-align:right;
+  padding-right:12px;
+}
+
+/* VS / score */
+.match__mid{
+  width:50px;
+  height:94px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-weight:800;
+  font-size:45px;
+  color:#1a1a1a;
+}
+
+/* Optionnel: style pour ligne “vide” */
+.match--empty{
+  opacity:0.35;
+}

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Waiting Screen - Matches</title>
+
+    <!-- LPTE -->
+    <script src="/static/main-bundle.js"></script>
+
+    <!-- (optionnel) un peu de style rapide -->
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; padding: 18px; }
+      .matches { display: flex; flex-direction: column; gap: 12px; max-width: 980px; }
+      .match { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid #ddd; border-radius: 10px; }
+      .team { display: grid; grid-template-columns: 56px 80px 1fr 72px; gap: 10px; align-items: center; }
+      .team .logo { width: 56px; height: 56px; object-fit: contain; background:#f3f3f3; border-radius: 10px; }
+      .team input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 8px; }
+      .center { display:flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; }
+      .center .scoreRow { display:flex; gap: 10px; align-items: center; }
+      .center input[type="number"] { width: 70px; padding: 8px 10px; border: 1px solid #ccc; border-radius: 8px; text-align: center; }
+      .pill { padding: 6px 10px; border-radius: 999px; border: 1px solid #ccc; background: #fafafa; font-weight: 700; }
+      .muted { color:#666; font-size: 12px; }
+      .row { display:flex; gap:10px; align-items:center; }
+      label { user-select:none; }
+    </style>
+  </head>
+
+  <body>
+    <h1>Waiting screen — Matches</h1>
+    <input style="width: 100%; margin-top: 3rem" readonly id="embed-copy" />
+    <div
+    style="display: flex; width: 100%; justify-content: center; margin-top: 1rem"
+    >
+      <button
+        class="btn btn-secondary"
+        style="width: 100px; margin-right: 1rem"
+        onclick="save()"
+      >
+        Save
+      </button>
+      <button
+        class="btn btn-secondary"
+        style="width: 100px; margin-right: 1rem"
+        onclick="unset()"
+      >
+        Unset
+      </button>
+    </div>
+  
+
+
+    <!-- DATALIST global -->
+    <datalist id="teams-datalist"></datalist>
+
+    <div class="matches" id="matches">
+      <!-- 7 matchs -->
+      <!-- Match template: match-0 .. match-6 -->
+      <!-- IDs: m{idx}-blue-name, m{idx}-blue-tag, m{idx}-blue-logo, etc. -->
+
+      <!-- MATCH 1 -->
+      <div class="match" id="match-0" data-match-index="0">
+        <div class="team team--blue">
+          <img class="logo" id="m0-blue-logo" alt="">
+          <input id="m0-blue-tag" placeholder="TAG" />
+          <input id="m0-blue-name" placeholder="Blue team name" list="teams-datalist" />
+          <input id="m0-blue-score" type="number" min="0" max="5" value="0" />
+        </div>
+
+        <div class="center">
+          <button id="m0-unset" type="button" onclick="unsetMatch(0)">X</button>
+          <div class="pill" id="m0-center-label">VS</div>
+          <div class="row">
+            <label class="row">
+              <input id="m0-show-score" type="checkbox" />
+              <span>Afficher score</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="team team--red">
+          <input id="m0-red-score" type="number" min="0" max="5" value="0" />
+          <input id="m0-red-name" placeholder="Red team name" list="teams-datalist" />
+          <input id="m0-red-tag" placeholder="TAG" />
+          <img class="logo" id="m0-red-logo" alt="">
+        </div>
+      </div>
+
+      <!-- MATCH 2 -->
+      <div class="match" id="match-1" data-match-index="1">
+        <div class="team team--blue">
+          <img class="logo" id="m1-blue-logo" alt="">
+          <input id="m1-blue-tag" placeholder="TAG" />
+          <input id="m1-blue-name" placeholder="Blue team name" list="teams-datalist" />
+          <input id="m1-blue-score" type="number" min="0" max="5" value="0" />
+        </div>
+        <div class="center">
+          <button id="m1-unset" type="button" onclick="unsetMatch(1)">X</button>
+          <div class="pill" id="m1-center-label">VS</div>
+          <label class="row"><input id="m1-show-score" type="checkbox" /><span>Afficher score</span></label>
+        </div>
+        <div class="team team--red">
+          <input id="m1-red-score" type="number" min="0" max="5" value="0" />
+          <input id="m1-red-name" placeholder="Red team name" list="teams-datalist" />
+          <input id="m1-red-tag" placeholder="TAG" />
+          <img class="logo" id="m1-red-logo" alt="">
+        </div>
+      </div>
+
+      <!-- MATCH 3 -->
+      <div class="match" id="match-2" data-match-index="2">
+        <div class="team team--blue">
+          <img class="logo" id="m2-blue-logo" alt="">
+          <input id="m2-blue-tag" placeholder="TAG" />
+          <input id="m2-blue-name" placeholder="Blue team name" list="teams-datalist" />
+          <input id="m2-blue-score" type="number" min="0" max="5" value="0" />
+        </div>
+        <div class="center">
+          <button id="m2-unset" type="button" onclick="unsetMatch(2)">X</button>
+          <div class="pill" id="m2-center-label">VS</div>
+          <label class="row"><input id="m2-show-score" type="checkbox" /><span>Afficher score</span></label>
+        </div>
+        <div class="team team--red">
+          <input id="m2-red-score" type="number" min="0" max="5" value="0" />
+          <input id="m2-red-name" placeholder="Red team name" list="teams-datalist" />
+          <input id="m2-red-tag" placeholder="TAG" />
+          <img class="logo" id="m2-red-logo" alt="">
+        </div>
+      </div>
+
+      <!-- MATCH 4 -->
+      <div class="match" id="match-3" data-match-index="3">
+        <div class="team team--blue">
+          <img class="logo" id="m3-blue-logo" alt="">
+          <input id="m3-blue-tag" placeholder="TAG" />
+          <input id="m3-blue-name" placeholder="Blue team name" list="teams-datalist" />
+          <input id="m3-blue-score" type="number" min="0" max="5" value="0" />
+        </div>
+        <div class="center">
+          <button id="m3-unset" type="button" onclick="unsetMatch(3)">X</button>
+          <div class="pill" id="m3-center-label">VS</div>
+          <label class="row"><input id="m3-show-score" type="checkbox" /><span>Afficher score</span></label>
+        </div>
+        <div class="team team--red">
+          <input id="m3-red-score" type="number" min="0" max="5" value="0" />
+          <input id="m3-red-name" placeholder="Red team name" list="teams-datalist" />
+          <input id="m3-red-tag" placeholder="TAG" />
+          <img class="logo" id="m3-red-logo" alt="">
+        </div>
+      </div>
+
+      <!-- MATCH 5 -->
+      <div class="match" id="match-4" data-match-index="4">
+        <div class="team team--blue">
+          <img class="logo" id="m4-blue-logo" alt="">
+          <input id="m4-blue-tag" placeholder="TAG" />
+          <input id="m4-blue-name" placeholder="Blue team name" list="teams-datalist" />
+          <input id="m4-blue-score" type="number" min="0" max="5" value="0" />
+        </div>
+        <div class="center">
+          <button id="m4-unset" type="button" onclick="unsetMatch(4)">X</button>
+          <div class="pill" id="m4-center-label">VS</div>
+          <label class="row"><input id="m4-show-score" type="checkbox" /><span>Afficher score</span></label>
+        </div>
+        <div class="team team--red">
+          <input id="m4-red-score" type="number" min="0" max="5" value="0" />
+          <input id="m4-red-name" placeholder="Red team name" list="teams-datalist" />
+          <input id="m4-red-tag" placeholder="TAG" />
+          <img class="logo" id="m4-red-logo" alt="">
+        </div>
+      </div>
+
+      <!-- MATCH 6 -->
+      <div class="match" id="match-5" data-match-index="5">
+        <div class="team team--blue">
+          <img class="logo" id="m5-blue-logo" alt="">
+          <input id="m5-blue-tag" placeholder="TAG" />
+          <input id="m5-blue-name" placeholder="Blue team name" list="teams-datalist" />
+          <input id="m5-blue-score" type="number" min="0" max="5" value="0" />
+        </div>
+        <div class="center">
+          <button id="m5-unset" type="button" onclick="unsetMatch(5)">X</button>
+          <div class="pill" id="m5-center-label">VS</div>
+          <label class="row"><input id="m5-show-score" type="checkbox" /><span>Afficher score</span></label>
+        </div>
+        <div class="team team--red">
+          <input id="m5-red-score" type="number" min="0" max="5" value="0" />
+          <input id="m5-red-name" placeholder="Red team name" list="teams-datalist" />
+          <input id="m5-red-tag" placeholder="TAG" />
+          <img class="logo" id="m5-red-logo" alt="">
+        </div>
+      </div>
+
+      <!-- MATCH 7 -->
+      <div class="match" id="match-6" data-match-index="6">
+        <div class="team team--blue">
+          <img class="logo" id="m6-blue-logo" alt="">
+          <input id="m6-blue-tag" placeholder="TAG" />
+          <input id="m6-blue-name" placeholder="Blue team name" list="teams-datalist" />
+          <input id="m6-blue-score" type="number" min="0" max="5" value="0" />
+        </div>
+        <div class="center">
+          <button id="m6-unset" type="button" onclick="unsetMatch(6)">X</button>
+          <div class="pill" id="m6-center-label">VS</div>
+          <label class="row"><input id="m6-show-score" type="checkbox" /><span>Afficher score</span></label>
+        </div>
+        <div class="team team--red">
+          <input id="m6-red-score" type="number" min="0" max="5" value="0" />
+          <input id="m6-red-name" placeholder="Red team name" list="teams-datalist" />
+          <input id="m6-red-tag" placeholder="TAG" />
+          <img class="logo" id="m6-red-logo" alt="">
+        </div>
+      </div>
+    </div>
+
+    <script src="/pages/op-module-waiting-matches/frontend.js" defer></script>
+  </body>
+</html>

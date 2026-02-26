@@ -1,0 +1,30 @@
+{
+  "name": "module-waiting-matches",
+  "version": "1.4.2",
+  "description": "Module that provides GFX elements for a waiting teams",
+  "author": "RCVolus",
+  "license": "MIT",
+  "toolkit": {
+    "modes": [
+      "PLUGIN"
+    ],
+    "plugin": {
+      "main": "dist/plugin.js"
+    },
+    "toolkitVersion": ">=1.11",
+    "needsBuild": true,
+    "dependencies": [
+      "module-teams"
+    ]
+  },
+  "devDependencies": {
+    "@rcv-prod-toolkit/types": "github:rcv-prod-toolkit/types",
+    "typescript": "^5.5.4",
+    "sass": "^1.97.1"
+  },
+  "scripts": {
+    "compile-sass": "sass frontend/style/:frontend/style/",
+    "watch-sass": "sass --watch frontend/style/:frontend/style/",
+    "build": "npm run compile-sass && tsc"
+  }
+}
