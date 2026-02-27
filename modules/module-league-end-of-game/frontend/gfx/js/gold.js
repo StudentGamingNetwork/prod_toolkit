@@ -4,76 +4,171 @@ let blue = getComputedStyle(document.body).getPropertyValue('--blue-team')
 let red = getComputedStyle(document.body).getPropertyValue('--red-team')
 const white = 'rgba(250,250,250,1)'
 const whiteTransparent = 'rgba(250,250,250,0.1)'
-const black = 'rgba(10,10,10,1)'
 
 async function displayGoldGraph(data) {
-  const frames = data.state.goldFrames
- const keys = Object.keys(frames)
-  const values = Object.values(frames)
-  /* const values = [ 0, 0, 16, -88, 594, 204, -521, -36, -225, 1104, 362, 341, 1454, 2379, 2928, 2301, 2070, 1706, -2505, -3615, -5701, 2930, 3215, 3389, 3611, 6416, 8672, 9189, 12123, 12609]      
-  const keys = [ 0, 0, 16, -88, 594, 204, -521, -36, -225, 1104, 362, 341, 1454, 2379, 2928, 2301, 2070, 1706, -2505, -3615, -5701, 2930, 3215, 3389, 3611, 6416, 8672, 9189, 12123, 12609] */
 
+  console.log(data)
+  const rawData = data.state.goldFrames
+  const labels = Object.keys(rawData).map(t => Math.floor(parseInt(t) / 60000));
+  const values = Object.values(rawData);
 
-  var ctx = document.getElementById('goldGraph').getContext('2d')
-  var chart = new Chart(ctx, {
-    type: 'NegativeTransparentLine',
-    data: {
-      labels: keys,
-      datasets: [
-        {
-          yAxisID: 'y-axis-0',
-          strokeColor: black,
-          pointColor: black,
-          pointStrokeColor: black,
-          data: values,
-          pointColor:white,
-          borderWidth: 6,
-          borderColor: white,
-          pointRadius:0,
-          lineTension: 0.10
-        }
-      ]
+  const dataMin = Math.abs(Math.min(...values));
+  const dataMax = Math.abs(Math.max(...values));
+  let zero_stop_percent = 100 * dataMax / (dataMax + dataMin)
+
+  const options = {
+    chart: {
+      type: 'area',
+      height: 1000,
+      width: 1920,
+      toolbar: { show: false },
+      zoom: { enabled: false },
+      background: 'transparent',
     },
-    options: {
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              autoskip: true,
-              maxTicksLimit: 10,
-              autoSkipPadding: 50,
-              fontSize: 20,
-              fontColor: white,
-              callback: function (value, index, values) {
-                return value.toFixed(0).replace(/-/g, '')
-              }
-            },
-            gridLines: {
-              color: whiteTransparent
-            }
-          }
-        ],
-        xAxes: [
-          {
-            ticks: {
-              autoskip: true,
-              maxTicksLimit: 10,
-              autoSkipPadding: 50,
-              fontSize: 20,
-              fontColor: white,
-              callback: function (value, index, values) {
-                return millisToMinutesAndSeconds(value)
-              }
-            },
-            gridLines: {
-              color: whiteTransparent
-            }
-          }
-        ]
+    series: [{
+      name: 'Gold Diff',
+      data: labels.map((x, i) => [x, values[i]])
+    }],
+    dataLabels: {
+      enabled: false,
+    },
+    xaxis: {
+      labels: {
+        style: { colors: '#fff' },
+        formatter: val => {
+          const totalSeconds = Math.round(val * 60);
+          const minutes = Math.floor(totalSeconds / 60);
+          const seconds = totalSeconds % 60;
+          return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
       },
-      legend: {
-        display: false
+      tickAmount: 15,
+      axisBorder: {
+        show: false
       }
+    },
+    yaxis: {
+      labels: { 
+        style: { colors: '#fff' },
+        formatter: val => {
+          if (Math.abs(val) >= 1000) {
+            return (val / 1000).toFixed(1).replace('.0', '') + 'k';
+          }
+          return val;
+        },
+      },
+      tickAmount: 20, 
+      forceNiceScale: true,
+      axisTicks: { show: false },
+      axisBorder: { show: false },
+      crosshairs: {
+        show: true,
+        position: 'back',
+        stroke: {
+          color: '#F9B233',
+          width: 1,
+          dashArray: 3
+        }
+      }
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 3.5,
+      colors: ['#F9B233'],
+      fill: {
+        type: "gradient",
+        gradient: {
+          type:'diagnonal1',
+          colorStops:
+              [
+                  {
+                      offset: 0,
+                      color: '#F7EC6C',
+                      opacity: 1
+                  },
+                  {
+                      offset: 30,
+                      color: "#CB890F",
+                      opacity: 0.6
+                  },
+                  {
+                      offset: 75,
+                      color: '#FBD745',
+                      opacity: 0.6
+                  },
+                  {
+                      offset: 100,
+                      color: '#BF6617',
+                      opacity: 1
+                  }
+              ]
+      }
+      },
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+          type:'vertical',
+          colorStops:
+              [
+                  {
+                      offset: 0,
+                      color: '#2DC6FF',
+                      opacity: 1
+                  },
+                  {
+                      offset: zero_stop_percent,
+                      color: "#30D5C8",
+                      opacity: 0.6
+                  },
+                  {
+                      offset: zero_stop_percent,
+                      color: '#FF3366',
+                      opacity: 0.6
+                  },
+                  {
+                      offset: 100,
+                      color: '#FF3366',
+                      opacity: 1
+                  }
+              ]
+      }
+  },
+  grid: {
+    borderColor: 'rgba(255,255,255,0.1)',
+    padding: {
+      left: 5,
+      right: 5,
+      top: 0,
+      bottom: 0
+    }
+  },
+  tooltip: { enabled: false },
+  legend: { show: false },
+  animations: {
+    enabled: true,
+    easing: 'easeinout',
+    speed: 1000,
+    delay: 1000,
+    animateGradually: {
+      enabled: false,
+      delay: 1000
+    },
+    dynamicAnimation: {
+      enabled: false,
+      speed: 350
+    }
+  }
+  };  
+  const Chart = new ApexCharts(document.getElementById("goldGraph"), options);
+  Chart.render().then(()=>{
+    const path = document.querySelector('.apexcharts-series path.apexcharts-line');
+    if (path) {
+      path.style.animation = 'pulseStroke 5s ease-in-out infinite';
+    }
+    const fill = document.querySelector('.apexcharts-area');
+    if (fill) {
+      fill.style.animation = 'areaPulse 8s ease-in-out infinite';
     }
   })
 }
@@ -131,39 +226,3 @@ function millisToMinutesAndSeconds(millis) {
   return minutes + ':' + (seconds < 10 ? '0' : '') + seconds
 }
 
-// Add new type of chart to chart.js
-Chart.defaults.NegativeTransparentLine = Chart.helpers.clone(
-  Chart.defaults.line
-)
-Chart.controllers.NegativeTransparentLine = Chart.controllers.line.extend({
-  update: function () {
-    // get the min and max values
-    var min = Math.min.apply(null, this.chart.data.datasets[0].data)
-    var max = Math.max.apply(null, this.chart.data.datasets[0].data)
-    var yScale = this.getScaleForId(this.getDataset().yAxisID)
-
-    // figure out the pixels for these and the value 0
-    var top = yScale.getPixelForValue(max)
-    var zero = yScale.getPixelForValue(0)
-    var bottom = yScale.getPixelForValue(min)
-
-    // build a gradient that switches color at the 0 point
-    var ctx = this.chart.chart.ctx
-    var gradient = ctx.createLinearGradient(0, top, 0, bottom)
-    var ratio = Math.min((zero - top) / (bottom - top), 1)
-    if (ratio < 0) {
-      ratio = 0
-      gradient.addColorStop(1, red)
-    } else if (ratio == 1) {
-      gradient.addColorStop(1, blue)
-    } else {
-      gradient.addColorStop(0, blue)
-      gradient.addColorStop(ratio, blue)
-      gradient.addColorStop(ratio, red)
-      gradient.addColorStop(1, red)
-    }
-    this.chart.data.datasets[0].backgroundColor = gradient
-
-    return Chart.controllers.line.prototype.update.apply(this, arguments)
-  }
-})

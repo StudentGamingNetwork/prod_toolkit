@@ -35,7 +35,7 @@ function createDamageBar(dmg, dmgMax) {
 
   const dmgBar = document.createElement('div')
   dmgBar.classList.add('dmgBar')
-  dmgBar.style.setProperty('--bar-width', `calc(${ratio}% - 3.5rem)`)
+  dmgBar.style.setProperty('--bar-width', `calc(${ratio}%)`)
 
   const dmgText = document.createElement('h3')
   dmgText.innerHTML = calcK(dmg)

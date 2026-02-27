@@ -6,13 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gold | League</title>
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/gold.css" />
     <link rel="stylesheet" href="/pages/op-plugin-theming/active/index.css" />
     <script src="/static/main-bundle.js"></script>
-    <script src="js/Chart.bundle.min.js"></script>
+    <!-- <script src="js/Chart.bundle.min.js"></script> -->
+    <style>
+      #goldChart {
+        width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+      }
+    </style>
   </head>
   <body>
-    <canvas id="goldGraph" style="background-color: black;"></canvas>
-
+    <div id="goldGraph"></div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/gold.js" defer></script>
   </body>
 </html>

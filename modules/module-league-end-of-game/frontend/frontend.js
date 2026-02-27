@@ -1,6 +1,6 @@
 const updateUi = async () => {
-  const server = await window.constants.getWebServerPort()
-  const location = `http://${server}/pages/op-module-league-end-of-game/gfx`
+  const server = await window.constants.getModuleURL()
+  const location = `${server}/gfx`
 
   const apiKey = await window.constants.getApiKey()
 

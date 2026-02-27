@@ -27,11 +27,21 @@
   src: url("./fonts/LeMurmure-Regular.woff"),
        url("./fonts/LeMurmure-Regular.woff2");
 }
+
+@font-face {
+  font-family: "Grotesk Compressed Extrabold";
+  src: url("./fonts/Kostic\ -\ Roc\ Grotesk\ Compressed\ ExtraBold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Murmure';
+  font-family: 'Grotesk Compressed Extrabold';
 }
 
 .module-teams-talk-gfx {
@@ -92,11 +102,13 @@
 
 #blue-team {
   left: 0;
+  margin-left: 40px;
 }
 
 #red-team {
   flex-direction: row-reverse;
   right: 0;
+  margin-right: 40px;
 }
 
 .score {
@@ -164,8 +176,7 @@
   max-height: 150px;
   overflow: hidden;
   color: black;
-  word-wrap: break-word;
-  
+  word-wrap: break-word;  
 }
 
 #blue-name {
@@ -187,10 +198,15 @@
 
 .draft-overlay {
   position: absolute;
+  left: 24px;
   top: 0;
   bottom: 0;
   z-index: 99;
   overflow: hidden;
+  border: none;
+}
+#draft_iframe {
+  border: none;
 }
 /* Variables utiles */
 :root{
@@ -241,11 +257,21 @@
 .team-logo-block{
   width: var(--logoBlockW);
   display:flex; flex-direction:column; align-items:center; gap:6px;
+  
 }
+
+#blue-team .team-logo-block{
+  filter: drop-shadow(5px 5px 15px #004521);
+}
+
+#red-team .team-logo-block{
+  filter: drop-shadow(5px 5px 15px #fa270c);
+}
+
 .logo-circle{
   width: var(--circleLogoSize); height: var(--circleLogoSize);
-  border-radius:50%;
-  background: rgba(255,255,255,.08);
+  border-radius:20%;
+  background: rgba(0, 0, 0,.2);
   border: 1px solid rgba(255,255,255,.18);
   display:grid; place-items:center; overflow: hidden;
 }
@@ -263,6 +289,7 @@
   color: black;
   text-shadow:0 2px 2px rgba(0,0,0,.35);
   justify-self: stretch;   /* occupe toute la colonne */
+  transform: translateY(72px);
 }
 
 /* Pips sous le logo (identiques des deux côtés) */

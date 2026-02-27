@@ -327,8 +327,8 @@ LPTE.onready(async () => {
     }
   })
   start(emdOfGameData)
-
-  LPTE.on(namespace, 'update', start)
+  console.log(emdOfGameData.state)
+  LPTE.on(namespace, 'update', start) 
 
   LPTE.on(namespace, 'end-of-game', (e) => {
     if (previousState === e.state) return

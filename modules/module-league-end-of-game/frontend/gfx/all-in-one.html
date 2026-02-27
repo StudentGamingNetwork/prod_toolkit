@@ -7,88 +7,133 @@
     <title>All in One | League</title>
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/all-in-one.css" />
+    <!-- <link rel="stylesheet" href="css/end-of-game.css" /> -->
     <link rel="stylesheet" href="/pages/op-plugin-theming/active/index.css" />
 
     <script src="/static/main-bundle.js"></script>
     <script src="js/Chart.bundle.min.js"></script>
   </head>
   <body class="module-league-end-of-game-all-in-one-gfx">
+    <div id="pageContent">
+      <div id="matchInfo">
+        <div id="matchHeader">
+            <div class="team blue logo">
+              <img id="logo-blue" src="./img/baron.png" />
+            </div>
+            <div class="team blue name-info">
+              <div class="team blue name" id="blue-name">Feur</div>
+              <div class="team blue tag" id="blue-tag">FR</div>
+            </div>
+            <div class="team blue score" id="blue-score">0</div>
 
-    <iframe 
-    src="http://localhost:3003/pages/op-module-teams/gfx/eog-gfx.html" frameborder="0"
-    width="1920"
-    height="1080"
-    style="position: absolute"
-    id="eog"></iframe>
-
-    <p class="titre" id="time">Temps de jeu</p>
-    <p id="timePlayed">00:00</p>
-
-    <div id="teamStats">
-      <p class="titre">résumé</p>
-      <div class="border">
-      <div id="kda" class="statsContainer">
-        <p class="stat blue"></p>
-        <p class="label">K/D/A</p>
-        <p class="stat red"></p>
+            <div class="game-time-info">
+              <div class="game-time" id="game-time-header">TEMPS DE JEU</div>
+              <div class="game-time" id="game-time">20:50</div>
+            </div>
+            
+            <div class="team red score" id="red-score">0</div>
+            <div class="team red name-info">
+              <div class="team red name" id="red-name">Coubeh</div>
+              <div class="team red tag" id="red-tag">CB</div>
+            </div>
+            <div class="team red logo">
+              <img id="logo-red" src="./img/herald.png" />
+            </div>
+        </div>
       </div>
-      <div id="gold" class="statsContainer" >
-        <p class="stat blue"></p>
-        <p class="label">Gold</p>
-        <p class="stat red"></p>
+      <!-- <div id="leftBorder"></div> -->
+      <div id="mainContent">
+        <div id="leftColumn">
+          <div id="leftTop">
+            <div id="teamStats" class="statsWrapper">
+              <div id="kda" class="statRow">
+                <p class="stat blue"></p>
+                <p class="label">K/D/A</p>
+                <p class="stat red"></p>
+              </div>
+              <div id="gold" class="statRow">
+                <p class="stat blue"></p>
+                <p class="label">GOLD</p>
+                <p class="stat red"></p>
+              </div>
+              <div id="tower" class="statRow">
+                <p class="stat blue"></p>
+                <p class="label">TOURS</p>
+                <p class="stat red"></p>
+              </div>
+              <div id="drakes" class="statRow">
+                <div class="stat blue dragon-icons"></div>
+                <p class="label">DRAGONS</p>
+                <div class="stat red dragon-icons"></div>
+              </div>
+              <div id="elders" class="statRow">
+                <div class="stat blue icon-count"><img class="icon" src="./img/elderLarge.png"><span>3</span></div>
+                <p class="label">ELDER DRAGONS</p>
+                <div class="stat red icon-count"><img class="icon" src="./img/elderLarge.png"><span>0</span></div>
+              </div>
+              <div id="barons" class="statRow">
+                <div class="stat blue icon-count"><img class="icon" src="./img/baron.png" style="width: 25px; height: 25px; margin-right: 10px;"><span>0</span></div>
+                <p class="label">BARON</p>
+                <div class="stat red icon-count"><img class="icon" src="./img/baron.png" style="width: 25px; height: 25px; margin-right: 10px;"><span>0</span></div>
+              </div>
+              <div class="statRow" id="herald">
+                <div class="stat blue"></div>
+                <p class="label">HERALD</p>
+                <div class="stat red"></div>
+              </div>              
+              <div id="horde" class="statRow">
+                <div class="stat blue icon-count"><img class="icon" src="./img/horde.png"><span>3</span></div>
+                <p class="label">VOID GUBS</p>
+                <div class="stat red icon-count"><img class="icon" src="./img/horde.png"><span>0</span></div>
+              </div>
+              <div class="statRow" id="atakhan">
+                <div class="stat blue"></div>
+                <p class="label">ATAKHAN</p>
+                <div class="stat red"></div>
+              </div>
+              <div class="statRow" id="feat">
+                <div class="stat blue"></div>
+                <p class="label">EXPLOIT DE FORCE</p>
+                <div class="stat red"></div>
+              </div>
+            </div>          
+          </div>
+          <div id="leftBottom">
+            <div id="draftRecap">
+              <div class="ban-grid" id="blueBan"></div>
+              <div class="pick-teams">
+                <div class="pick-grid blue-grid" id="blueTeamPicks"></div>
+                <div class="pick-grid red-grid" id="redTeamPicks"></div>
+              </div>
+              <div class="ban-grid" id="redBan"></div>      
+            </div>
+          </div>
+        </div>
+        
+        <div id="rightColumn">
+          <div id="rightTop">
+            <div id="damageGraph">
+              <div class="team blue"></div>
+              <div class="team red"></div>      
+            </div>
+          </div>
+          <div id="rightBottom">
+            <div id="goldGraphWrapper" style="position: relative; width: 1920px; height: 1000px;">
+              <div id="goldGraph"></div>
+              <div id="eventOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+            </div>    
+          </div>
+        </div>
       </div>
-      <div id="tower" class="statsContainer">
-        <p class="stat blue"></p>
-        <p class="label">Tower</p>
-        <p class="stat red"></p>
-      </div>
-      <div id="inhibitors" class="statsContainer">
-        <p class="stat blue"></p>
-        <p class="label">Inhibitors</p>
-        <p class="stat red"></p>
-      </div>
-      <div id="drakes" class="statsContainer">
-        <div class="stat blue"></div>
-        <p class="label">Drakes</p>
-        <div class="stat red"></div>
-      </div>
-      <div id="elders" class="statsContainer">
-        <p class="stat blue"></p>
-        <p class="label">Elders</p>
-        <p class="stat red"></p>
-      </div>
-      <div id="barons" class="statsContainer">
-        <p class="stat blue"></p>
-        <p class="label">Barons</p>
-        <p class="stat red"></p>
-      </div>
-      <!-- <div id="horde" class="statsContainer">
-        <p class="stat blue"></p>
-        <p class="label">Void Grubs</p>
-        <p class="stat red"></p>
-      </div> -->
-      <div id="bans" class="statsContainer">
-        <div class="stat blue"></div>
-        <p class="label">Bans</p>
-        <div class="stat red"></div>
-      </div>
+      <div id="partnerArea"></div>
     </div>
-  </div>
-
-    <div id="goldGraph">
-      <p class="titre" id="goldDiff">Différence de gold</p>
-      <canvas id="goldGraphCTX"></canvas>
-    </div>
-
-    <div id="damageGraph">
-      <div class="team blue"></div>
-      <div class="team red"></div>
-    </div>
-
 
     <script src="js/all-in-one/main.js" defer></script>
     <script src="js/all-in-one/teamStats.js" defer></script>
     <script src="js/all-in-one/damage.js" defer></script>
+    <script src="js/all-in-one/pub-order.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="js/all-in-one/gold.js" defer></script>
+    
   </body>
 </html>

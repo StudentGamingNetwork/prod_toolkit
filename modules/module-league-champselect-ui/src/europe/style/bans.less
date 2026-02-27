@@ -1,7 +1,7 @@
 
 .Bans {
   position: absolute;
-  bottom: 0;
+  bottom: -100px;
   width: 260px;
   height: calc(2*var(--box-ban-height));
   display: flex;
@@ -15,8 +15,8 @@
   
   .Ban {
     display: block;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     overflow: hidden;
     position: relative;
 
@@ -47,8 +47,12 @@
 }
 
 &.TeamRed .BansContainer{
+  transform: translateX(265px);
   flex-direction: row-reverse;
   // bottom: 0;
+}
+&.TeamBlue .BansContainer{
+  transform: translateX(-270px);
 }
 
 .BansWrapper {

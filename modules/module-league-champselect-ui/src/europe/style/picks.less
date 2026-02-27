@@ -16,14 +16,15 @@
   flex-direction: column;
   box-sizing: border-box;
   overflow: hidden;
+  transform: translateY(-8px);
 
   .Pick {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #0a0a0a;
-    border: solid var(--border-between-color) 5px;
+    background-color: #1a1a1a;
+    border: solid var(--border-between-color) 3px;
     border-top: none;
 
     transition: height 0.4s ease, transform 0.4s ease;
@@ -68,7 +69,7 @@
       color: white;
       background-color: transparent;
       text-align: center;
-      font-family: "Murmure";
+      font-family: "Grotesk Compressed Extrabold";
       font-size: calc(0.8 * var(--pick-name-height));
       line-height: var(--pick-name-height);
       display: block;
@@ -93,7 +94,7 @@
       color: white;
       background-color: transparent;
       text-align: center;
-      font-family: "Murmure";
+      font-family: "Grotesk Compressed Extrabold";
       font-size: calc(0.5 * var(--pick-name-height));
       line-height: var(--pick-name-height);
       .textInfos{
@@ -155,6 +156,7 @@
   .ChampionName,
   .PlayerName{
     text-align: right;
+    transform: translateX(-15px); 
   }
 
 }
@@ -172,6 +174,7 @@
     .PlayerName {
       text-align: left;
       margin-left: 5px;  
+      transform: translateX(15px); 
     }
 }
 

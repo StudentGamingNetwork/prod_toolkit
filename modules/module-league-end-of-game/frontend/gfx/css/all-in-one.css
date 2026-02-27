@@ -1,283 +1,503 @@
-body {
-  height: 1080px;
-  width: 1920px;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 25px;
+@font-face {
+  font-family: 'Futura';
+  src: url(./fonts/Futura.ttf);
+  font-weight: 300;
   font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: italic;
-  font-variation-settings:
-    "wdth" 81.2,
-    "YTLC" 500;
-
+  font-variation-settings: 
+  "wdth" 81.5,
+  "YTLC" 500;
 }
 
-#teamStats {
-  width: 710px;
-  height: 70%;
-  left: 100px;
-  top: 220px;
-  grid-column: 1 / 1;
-  grid-row: 1 / 3;
+html, body {
+  margin: 0;
+  padding: 0;
+  background-image: url("../img/background.png");
+  font-family: 'Futura', "Nunito Sans", sans-serif;
+  font-weight: 800;
+  font-optical-sizing: auto;
+  font-variation-settings: 
+  "wdth" 81.5,
+  "YTLC" 500;
+
+  color: white;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+#pageContent {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  position: absolute;
-  color:white;
-}
-
-.titre {
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  top: -50px;
-  text-transform: uppercase;
-  color: white;
-  font-size: 40px;;
-  filter: drop-shadow(4px 4px 3px rgba(0,0,0,0.5));
-}
-
-#goldDiff {
-  transform: translateY(-5px);
-}
-
-#time {
-  top:32px;
-  font-size: 20px;
-}
-
-#timePlayed {
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  top: 60px;
-  text-transform: uppercase;
-  color: white;
-  font-size: 40px;;
-  filter: drop-shadow(4px 4px 3px rgba(0,0,0,0.5));
-}
-
-.border {
-  position: absolute;
-  border :solid;
-  padding: 8px 100px;
-  border-width: 8px;
-  border-radius: 10px;
-  border-color: #c5279c;
-  background-color: #09a4d8;
-  filter: drop-shadow(4px 4px 2px rgba(0,0,0,0.5));
-
-}
-
-.statsContainer {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  width: 500px;
-  margin-bottom: 40px;
-  filter: drop-shadow(4px 4px 2px rgba(0,0,0,0.5));
-
-}
-
-.bg-image {
-  z-index: 0;
-  position: absolute;
   width: 1920px;
   height: 1080px;
-  left:0;
-  top:0;
+}
+
+#matchInfo {
+  width: 100%;
+  height: 135px;
+}
+
+#matchHeader {
+  width: 50%;
+  height: 135px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: 'Futura', "Nunito Sans", sans-serif;
+  font-weight: 1000;
 }
 
 
-.statsContainer:last-child {
-  margin-bottom: 0px;
+.team.logo {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
 }
 
-.label {
-  font-family: var(--secondary-font-family);
-  text-transform: uppercase;
-  font-size: 25px;
-  color: var(--accent-color);
-  margin: 0 35px;
-  width: 225px;
-  font-weight: 800;
-}
-
-#drakes .label{
-  position: absolute;
-}
-
-.stat {
-  font-size: 30px;
-  width: 300px;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 27px;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 75,
-    "YTLC" 540;
-}
-
-.stat.blue {
-  color: white;
-  text-align: center;
-}
-
-.stat.red {
-  margin-right: auto;
-  color: var(--red-team);
-  text-align: center;
-}
-#kda {
-  margin-top: 6px;
-}
-
-#kda .stat {
-  width: 350px;
-}
-.dragon {
-  width: 43px;
-  height: 30px;
+/* Logos */
+.team.logo img {
+  width: 65px;
+  height: 65px;
   object-fit: contain;
-  transform: translateX(15px);
 }
 
-.stat.blue .dragon:not(:last-child) {
-  margin-left: 10px;
-}
-
-#drakes .stat,
-#bans .stat {
+/* Name + tag wrapper */
+.name-info {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+  min-width: 150px;
+  padding: 0 8px;
 }
 
-#drakes .stat.blue {
-  flex-direction: row-reverse;
-  transform: translateX(-65px);
+.team.blue.name-info {
+  align-items: flex-start;
+  text-align: left;
 }
 
-#drakes .stat.red{
-  transform: translateX(40px);
+/* Align red to right */
+.team.red.name-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;}
+#red-name{
+  text-align: right;
+}
+/* Name */
+.team.name {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  white-space: nowrap;
+  line-height: 1.2;
+  width: 100%; 
+  
 }
 
-.stat.red .dragon:not(:last-child) {
-  margin-right: 10px;
+/* Tag */
+.team.tag {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--accent-color, #F9B233);
+  font-weight: 600;
+  opacity: 0.8;
+  white-space: nowrap;
 }
 
-.ban {
-  width: 45px;
+/* Score */
+.team.score {
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  width: 60px;
+}
+.team.red.score {
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  width: 60px;
 }
 
-.stat.blue .ban:not(:first-child) {
-  margin-left: 12px;
+/* Game time section */
+.game-time-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 260px;
 }
 
-.stat.red .ban:not(:last-child) {
-  margin-right: 12px;
+.game-time-header {
+  font-size: 20px;
+  color: #aaa;
+  letter-spacing: 0.05em;
 }
 
-
-#goldGraph {
-  width: 700px;
-  position: absolute;
-  right: 90px;
-  top: 220px;
-  border :solid;
-  border-width: 8px;
-  border-radius: 10px;  
-  border-color: #c5279c;
-  background-color: #09a4d8;
-  filter: drop-shadow(4px 4px 2px rgba(0,0,0,0.5));
+.game-time {
+  font-size: 20px;
+  color:  #ffffff;
+  font-weight: bold;
 }
-
-#damageGraph {
+/* Partner bar at bottom */
+#partnerArea {
+  height: 135px;
   width: 100%;
-  height: 100%;
-  display: none;
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  position: absolute;
 }
 
-#damageGraph .team {
-  width: 100%;
-  height: 100%;
+/* Main area above partner bar */
+#mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 80%;
+  left:8%;
+  top: 135px;
+  height: 810px;
+  padding: 10px 50px 0 50px;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 12px;  z-index: 10;
+  gap: 40px;
+}
+
+/* Left side: Stats + Draft */
+#leftColumn {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 50%;
+}
+#leftBorder{
+  position: absolute;
+  width: 30%;
+  height: 70%;
+  left: 10%;
+  top:160px;
+  border: 4px solid;
+  border-image: linear-gradient(135deg, #F7EC6C 0%, #CB890F 30%, #FBD745 75%, #BF6617 100%);
+  border-image-slice: 1;
+  border-radius: 12px;
+  z-index: 99;
 }
 
-#damageGraph .container {
+/* Right side: Damage + Gold */
+#rightColumn {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  width: 50%;
+  gap: 20px
+}
+
+/* GOLD GRAPH WRAPPER */
+#goldGraphWrapper {
+  position: relative;
+  width: 800px;
+  height: 300px;
+  right: 50px;
+}
+#goldGraph {
   width: 100%;
+  height: 100%;
+}
+#eventOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* DAMAGE GRAPH */
+#damageGraph {
+  width: 910px;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.team {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 8px;
+}
+
+/* One container per player */
+/* Shared container for each player */
+.container {
+  display: flex;
+  width: 90%;
   align-items: center;
+  height: 40px;
+  gap: 8px;
 }
 
-#damageGraph .red {
-  margin-left: auto;
-}
-
-#damageGraph .red .container,
-#damageGraph .red .container .dmgContainer {
-  flex-direction: row-reverse;
-}
-
+/* Champion icon stays full height */
 .champImg {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
-.blue .champImg {
-  margin-right: 20px;
-}
-
-.red .champImg {
-  margin-left: 20px;
-}
-
+/* Damage container is centered vertically with shorter bar height */
 .dmgContainer {
-  width: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
   position: relative;
+  height: 140%; /* 👈 shorter bar */
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  justify-content: flex-start;
 }
 
+/* Damage bar itself */
+.dmgBar {
+  position: absolute;
+  left: 0;
+  height: 70%;
+  width: var(--bar-width, 50%);
+  background: linear-gradient(to left, #30D5C8 10%, #08648f 40%, #010e14 100%);
+  border-radius: 3px;
+  z-index: 1;
+  transition: width 0.7s ease-out;
+}
+
+/* Text value on top of the bar */
 .dmgContainer h3 {
-  color: var(--accent-color);
-  animation: fade-in 0.25s;
+  margin: 0;
+  padding-left: 0.5rem;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  z-index: 2;
+  line-height: 1;
 }
 
-#redTeam .dmgContainer {
+.team.red .container {
+  flex-direction: row-reverse;
+}
+.team.red .dmgContainer {
   justify-content: flex-end;
+  background: rgba(255, 255, 255, 0.05);
+  position: relative;
 }
 
-.dmgContainer .dmgBar {
+.team.red .dmgBar {
+  right: 0;
+  left: unset;
+  width: var(--bar-width, 50%);
+  border-radius: 3px;
+  background:linear-gradient(to left, rgba(255, 51, 102, 0.6), #FF3366);
+  position: absolute;
+}
+
+
+/* END GAME STATS FLEX ROW */
+#teamStats {
+  height: 630px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 10px 0;
+  font-family: "Futura", "Nunito Sans", sans-serif;
+  font-weight: 800;
+  font-optical-sizing: auto;
+  font-variation-settings: 
+  "wdth" 81.5,
+  "YTLC" 500;
+
+}
+
+.statRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  gap: 5px;
+}
+
+/* Standard text stats */
+.stat {
+  width: 30%;
+  text-align: center;
+  font-size: 20px;
+  filter : drop-shadow(0px 2px 4px rgba(0, 0, 28, 1));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Stat label column */
+.label {
+  flex: 1;
+  text-align: center;
+  color: #fff;
+  filter : drop-shadow(0px 2px 4px rgba(0, 0, 28, 1));
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+/* Dragon icons */
+.dragon-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+}
+
+.dragon-icons.blue{
+  transform: translateX(62.5%);
+}
+
+.dragon-icons.red{
+  transform: translateX(-62.5%);
+}
+
+.dragon-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Icons + value (Herald, Void Grubs, Atakhan) */
+.icon-count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+.icon-count .icon {
+  width: 35px;
   height: 35px;
-  width: var(--bar-width);
-  animation: scale 0.5s ease;
 }
 
-.blue .dmgBar {
-  background-color: var(--blue-team);
-  transform-origin: left;
-  margin-right: 1rem;
+.icon-count span {
+  font-size: 18px;
 }
 
-.red .dmgBar {
-  background-color: var(--red-team);
-  transform-origin: right;
-  margin-left: 1rem;
+/* PICK ET BAN RECAP */
+
+#draftRecap {
+  width: fit-content;
+  height: 130px;
+  width: 820px;
+  transform: translateX(-16%) translateY(-20%);
+  background-color: var(--background-color);
+  display: flex;
+  box-shadow: 3px 2px 9px 0px rgba(0, 0, 0, 0.25);
+  transform-origin: center bottom;
+  animation: in 0.5s;
+}
+.ban {
+  width: 15%;
+  height: 130px;
+  padding: 0 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes scale {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: var(--bar-width);
-  }
+.pick-teams {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+}
+
+.pick-team {
+  width: 100%;
+  height: 75px;
+}
+
+#blueTeamPicks {
+  background-image: linear-gradient(to left, #30D5C8 , #08648f);;
+}
+
+#redTeamPicks {
+  background-image: linear-gradient(to right, rgba(255, 51, 102, 0.6), #FF3366);
+}
+
+#blueBan {
+  background: linear-gradient(to right, #30D5C8 10%, #08648f 40%, #010e14 100%);
+}
+#redBan {
+  background: linear-gradient(to left, #FF3366 10%, rgba(255, 51, 102, 0.6) 40%, #010e14 100%);
+}
+
+.ban-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 42px);
+  grid-template-rows: repeat(2, 42px);
+  gap: 6px 12px;
+  padding: 8px 16px;
+  width: fit-content;
+  place-items: center;
+  justify-content: center;
+  align-content: center;
+}
+#redBan{
+  grid: right;
+}
+.ban-grid img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+.pick-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  height: 65px;
+  width: 100%;
+  padding: 0 16px;
+}
+
+#blueTeamPicks {
+  background: linear-gradient(to left, #30D5C8, #08648f);
+}
+
+#redTeamPicks {
+  background: linear-gradient(to right, rgba(255, 51, 102, 0.6), #FF3366);
+}
+
+.pick-grid img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  justify-self: center;
+  align-self: center;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
 }

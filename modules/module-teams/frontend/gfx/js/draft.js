@@ -50,16 +50,25 @@ window.LPTE.onready(() => {
   window.LPTE.on(namespace, 'update', update)
 })
 
-function updatePips(team, score){
+function updatePips(bestOf, team, score){
   const pips = document.querySelectorAll(`#${team}-pips .pip`);
+  pipblue_div = document.querySelector(`#blue-pips`)
+  pipred_div = document.querySelector(`#red-pips`)
 
   pips.forEach((pip, i) => {
-    if (i < score) {
-      pip.classList.add("filled");
+    if (bestOf > 1){
+      pipblue_div.style.diplay = 'flex'
+      pipred_div.style.diplay = 'flex'
+      if (i < score) {
+        pip.classList.add("filled");
+      } else {
+        pip.classList.remove("filled");
+      }
     } else {
-      pip.classList.remove("filled");
+      pipblue_div.style.display = 'none'
+      pipred_div.style.display = 'none'
     }
-  });
+    });
 }
 
 function displayTeams(teams, bestOf) {
@@ -69,20 +78,20 @@ function displayTeams(teams, bestOf) {
 
   blueName.innerHTML = teams.blueTeam.name
   blueScore.innerHTML = teams.blueTeam.score
-  updatePips("blue", teams.blueTeam.score)
+  updatePips(bestOf, "blue", teams.blueTeam.score)
   blueLogo.src = "../img/" + teams.blueTeam.logo
   // resizeText(blueName)
 
   redName.innerHTML = teams.redTeam.name
   redScore.innerHTML = teams.redTeam.score
-  updatePips("red", teams.redTeam.score)
+  updatePips(bestOf, "red", teams.redTeam.score)
   redLogo.src = "../img/" + teams.redTeam.logo
   // resizeText(redName)
 
   redName.classList.remove('outline')
   blueName.classList.remove('outline')
 
-  if (bestOf > 2) {
+  if (bestOf > 1) {
     blueScore.style.display = 'block'
     redScore.style.display = 'block'
   } else {

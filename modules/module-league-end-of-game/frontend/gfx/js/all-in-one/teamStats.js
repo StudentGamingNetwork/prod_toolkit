@@ -1,5 +1,5 @@
 // TeamStat Div`s
-const teamStats = document.querySelector('#teamStats')
+const teamStats = document.getElementById('teamStats')
 const kdaDiv = teamStats.querySelector('#kda')
 const goldDiv = teamStats.querySelector('#gold')
 const towerDiv = teamStats.querySelector('#tower')
@@ -7,10 +7,8 @@ const inhibitorsDiv = teamStats.querySelector('#inhibitors')
 const drakesDiv = teamStats.querySelector('#drakes')
 const eldersDiv = teamStats.querySelector('#elders')
 const baronsDiv = teamStats.querySelector('#barons')
-const hordeDiv = teamStats.querySelector('#horde')
 const bansDiv = teamStats.querySelector('#bans')
 
-const timePlayed = document.querySelector("#timePlayed")
 
 function displayTeamStats(teams) {
   // KDA
@@ -31,37 +29,50 @@ function displayTeamStats(teams) {
   towerDiv.querySelector('.stat.blue').innerHTML = teams[100].stats.towers
   towerDiv.querySelector('.stat.red').innerHTML = teams[200].stats.towers
 
-  // Inhibitors
-  inhibitorsDiv.querySelector('.stat.blue').innerHTML =
-    teams[100].stats.inhibitors
-  inhibitorsDiv.querySelector('.stat.red').innerHTML =
-    teams[200].stats.inhibitors
-
   // Drakes
   displayDrakes(teams)
-
+  setUniqueObjectiveIcon('herald', teams[100].stats.riftHerald, teams[200].stats.riftHerald, './img/herald.png');
+  setUniqueObjectiveIcon('atakhan', teams[100].stats.atakhan, teams[200].stats.atakhan, './img/atakkan.png');
   // Elders
-  eldersDiv.querySelector('.stat.blue').innerHTML = teams[100].stats.elders
-  eldersDiv.querySelector('.stat.red').innerHTML = teams[200].stats.elders
-
+  // eldersDiv.querySelector('.stat.blue.span').innerHTML = teams[100].stats.elders
+  // eldersDiv.querySelector('.stat.red').innerHTML = teams[200].stats.elders
+  injectIconStat("barons", "blue", "./img/baron.png", teams[100].stats.barons);
+  injectIconStat("barons", "red", "./img/baron.png", teams[200].stats.barons);
+  injectIconStat("elders", "blue", "./img/elderLarge.png", teams[100].stats.elders);
+  injectIconStat("elders", "red", "./img/elderLarge.png", teams[200].stats.elders);
+  injectIconStat("horde", "blue", "./img/horde.png", teams[100].stats.horde);
+  injectIconStat("horde", "red", "./img/horde.png", teams[200].stats.horde);
   // Barons
-  baronsDiv.querySelector('.stat.blue').innerHTML = teams[100].stats.barons
-  baronsDiv.querySelector('.stat.red').innerHTML = teams[200].stats.barons
-
-  // Void Grubs
-  hordeDiv.querySelector('.stat.blue').innerHTML = teams[100].stats.horde
-  hordeDiv.querySelector('.stat.red').innerHTML = teams[200].stats.horde
-  console.log(teams[100].stats)
+  // baronsDiv.querySelector('.stat.blue').innerHTML = teams[100].stats.barons
+  // baronsDiv.querySelector('.stat.red').innerHTML = teams[200].stats.barons
 
   // Bans
-  displayBans(teams)
+  // displayBans(teams)
 }
 
-function displayTimer(frames){
-  var millis = Object.keys(frames)[Object.keys(frames).length - 1] 
-  var minutes = Math.floor(millis / 60000)
-  var seconds = ((millis % 60000) / 1000).toFixed(0)
-  timePlayed.innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
+function setUniqueObjectiveIcon(rowId, blueValue, redValue, iconPath) {
+  const blueContainer = document.querySelector(`#${rowId} .blue`);
+  const redContainer = document.querySelector(`#${rowId} .red`);
+  
+  blueContainer.innerHTML = '';
+  redContainer.innerHTML = '';
+
+  if (blueValue === 1) {
+    blueContainer.innerHTML = `<img class="icon" src="${iconPath}" alt="${rowId}">`;
+  }
+
+  if (redValue === 1) {
+    redContainer.innerHTML = `<img class="icon" src="${iconPath}" alt="${rowId}">`;
+  }
+}
+
+function injectIconStat(id, team, iconSrc, value) {
+  const container = document.querySelector(`#${id} .${team}`);
+  if (id === "barons"){
+    container.innerHTML = `<img class="icon" src="${iconSrc}" style="width: 25px; height: 25px; margin-right: 10px;"><span>${value}</span>`;
+  } else {  
+    container.innerHTML = `<img class="icon" src="${iconSrc}"><span>${value}</span>`;
+  }
 }
 
 function displayDrakes(teams) {
@@ -74,7 +85,7 @@ function displayDrakes(teams) {
       .split('_')[0]
       .toLowerCase()
     const drakeImg = document.createElement('img')
-    drakeImg.classList.add('dragon')
+    drakeImg.classList.add('dragon-icon')
     drakeImg.src = `${staticURL}/img/drakes/${drake}.png`
 
     drakesDiv.querySelector('.stat.blue').appendChild(drakeImg)
@@ -84,7 +95,7 @@ function displayDrakes(teams) {
   for (let i = 0; i < redDrakes.length; i++) {
     const drake = redDrakes[i].split('_')[0].toLowerCase()
     const drakeImg = document.createElement('img')
-    drakeImg.classList.add('dragon')
+    drakeImg.classList.add('dragon-icon')
     drakeImg.src = `${staticURL}/img/drakes/${drake}.png`
 
     drakesDiv.querySelector('.stat.red').appendChild(drakeImg)
@@ -114,4 +125,12 @@ function displayBans(teams) {
 
     bansDiv.querySelector('.stat.red').appendChild(banImg)
   }
+}
+
+function displayFeat(teamId){
+  const blueteamScore = teamId === 100 ? 1 : 0
+  const redteamScore = teamId === 200 ? 1 : 0
+  const color = teamId === 100 ? "blue" : "red"
+  const todisplay = `./img/feat_${color}.png`
+  setUniqueObjectiveIcon('feat', blueteamScore, redteamScore, todisplay);
 }

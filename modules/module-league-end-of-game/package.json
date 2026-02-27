@@ -1,6 +1,6 @@
 {
     "name": "module-league-end-of-game",
-    "version": "1.5.4",
+    "version": "1.6.0",
     "description": "Module that provides various GFX elements used by the RCV TenT tournament",
     "author": "RCVolus",
     "license": "MIT",
@@ -12,7 +12,7 @@
             "main": "dist/plugin.js"
         },
         "needsBuild": true,
-        "toolkitVersion": ">=1.8",
+        "toolkitVersion": ">=1.11",
         "dependencies": [
             "module-league-state",
             "module-league-static"
@@ -20,9 +20,12 @@
     },
     "devDependencies": {
         "@rcv-prod-toolkit/types": "github:rcv-prod-toolkit/types",
-        "typescript": "^5.3.3"
+        "typescript": "^5.5.4"
     },
     "scripts": {
         "build": "tsc"
+    },
+    "dependencies": {
+        "apexcharts": "^4.5.0"
     }
 }
