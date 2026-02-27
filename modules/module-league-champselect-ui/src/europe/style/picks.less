@@ -8,25 +8,6 @@
 }
 
 @import "./fonts";
-@font-face {
-  font-family: "Acumin Pro Condensed Black";
-  src: url("https://db.onlinewebfonts.com/t/2ad888075d277e8d11de6c816762be5e.eot");
-  src: url("https://db.onlinewebfonts.com/t/2ad888075d277e8d11de6c816762be5e.eot?#iefix")format("embedded-opentype"),
-  url("https://db.onlinewebfonts.com/t/2ad888075d277e8d11de6c816762be5e.woff2")format("woff2"),
-  url("https://db.onlinewebfonts.com/t/2ad888075d277e8d11de6c816762be5e.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/2ad888075d277e8d11de6c816762be5e.ttf")format("truetype"),
-  url("https://db.onlinewebfonts.com/t/2ad888075d277e8d11de6c816762be5e.svg#Acumin Pro Condensed Black")format("svg");
-}
-
-@font-face {
-  font-family: "Neue Haas Grotesk Display Pro 75 Bold";
-  src: url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.eot");
-  src: url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.eot?#iefix")format("embedded-opentype"),
-  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.woff2")format("woff2"),
-  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.ttf")format("truetype"),
-  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.svg#Neue Haas Grotesk Display Pro 75 Bold")format("svg");
-}
 
 .Picks {
   width: 100%;
@@ -42,20 +23,19 @@
     height: 100%;
     overflow: hidden;
     background-color: #0a0a0a;
-    // border: solid var(--border-between-color) 5px;
-    border: none;
+    border: solid var(--border-between-color) 5px;
     border-top: none;
 
     transition: height 0.4s ease, transform 0.4s ease;
     transform: scale(1);
     overflow: hidden;
   
-    // &:first-child{
-    //   border: solid var(--border-between-color) 5px;
-    // }
+    &:first-child{
+      border: solid var(--border-between-color) 5px;
+    }
 
     &.Active {
-      // height: 100%; // or whatever height you want
+      height: 150%; // or whatever height you want
       .PlayerName {
         position: absolute;
         bottom: -20px;
@@ -88,8 +68,7 @@
       color: white;
       background-color: transparent;
       text-align: center;
-      font-family: "Acumin Pro Condensed Black";
-      font-style: italic;
+      font-family: "Murmure";
       font-size: calc(0.8 * var(--pick-name-height));
       line-height: var(--pick-name-height);
       display: block;
@@ -114,13 +93,11 @@
       color: white;
       background-color: transparent;
       text-align: center;
-      font-family: "Acumin Pro Condensed Black";
-      font-style: italic;
+      font-family: "Murmure";
       font-size: calc(0.5 * var(--pick-name-height));
       line-height: var(--pick-name-height);
       .textInfos{
-        width: 376px;
-        padding: 0 15px;
+        width: 350px;
         filter:drop-shadow(0px 0px 4px rgb(0,0,0))
       }
 
@@ -211,19 +188,19 @@
 }
 @keyframes open_player {
   0%{
-      width: 100%;
+      height: 100%;
   }
   100%{
-      width: 100%;
+      height: 150%;
   }
 }
 
 @keyframes close_player {
   0%{
-      width: 100%;
+      height: 150%;
   }
   100%{
-      width: 100%;
+      height: 100%;
   }
 }
 
@@ -234,45 +211,3 @@
 .animateOut {
   animation: out 0.5s ease-in forwards;
 }
-/* =========================
-   PICKS — ABSOLUTE LAYOUT
-   Specs:
-   size: 376x120
-   start Y: 198
-   gaps: 6 / 6 / 36 / 6
-   ========================= */
-
-   .Picks {
-    position: absolute;
-    top: 198px;
-    left: 0;
-    width: 376px;
-    height: 654px; // 120*5 + (6+6+36+6) = 600 + 54
-    display: block; // override flex
-  }
-  
-  .TeamRed .Picks {
-    left: auto;
-    right: 0;
-  }
-  
-  /* Chaque Pick devient un “slot” absolu */
-  .Picks > .Pick {
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 376px;
-    height: 120px;
-  }
-  
-  .TeamRed .Picks > .Pick {
-    left: auto;
-    right: 0;
-  }
-  
-  /* Offsets Y relatifs au container .Picks */
-  .Picks > .Pick:nth-child(1) { top: 0px; }
-  .Picks > .Pick:nth-child(2) { top: 126px; } // 120 + 6
-  .Picks > .Pick:nth-child(3) { top: 252px; } // 2*(120+6)
-  .Picks > .Pick:nth-child(4) { top: 408px; } // 252 + 120 + 36
-  .Picks > .Pick:nth-child(5) { top: 534px; } // 408 + 120 + 6

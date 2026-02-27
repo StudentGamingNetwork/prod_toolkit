@@ -1,68 +1,21 @@
 const namespace = 'module-teams'
 
-// --- SÉLECTEURS ---
 const teamsContainer = document.querySelectorAll('.team')
-
-const blueName = document.querySelector('#blue-name span') || document.querySelector('#blue-name')
-const redName = document.querySelector('#red-name span') || document.querySelector('#red-name')
-
-const blueScore = document.getElementById('blue-bo') 
-const redScore = document.getElementById('red-bo')   
-
+const blueScore = document.getElementById('blue-score')
+const blueName = document.querySelector('#blue-name')
+const redScore = document.getElementById('red-score')
+const redName = document.querySelector('#red-name')
+const pointContainer = document.querySelector('#point-container')
 const blueLogo = document.querySelector('#blue-logo')
 const redLogo = document.querySelector('#red-logo')
-
-const blueStanding = document.querySelector('#blue-standing')
-const redStanding = document.querySelector('#red-standing')
-
 const draft = document.getElementById("draft_iframe")
+// const score = document.querySelector('.score')
 
-// --- CONFIGURATION SERVEUR ---
-const server = window.constants.getWebServerPort()
-const apiKey = window.constants.getApiKey()
+const server =  window.constants.getWebServerPort()
+const apiKey =  window.constants.getApiKey()
 
-// URL de l'iframe (Module Champselect UI)
 const location_draft = `http://${server}/pages/op-module-league-champselect-ui/champselect.html`
 draft.src = `${location_draft}${apiKey !== null ? '?apikey=' + apiKey : ''}`
-
-
-// --- GESTION DES IMAGES BO ---
-function setBo3Image(imgEl, side, score) {
-  // side = "left" | "right"
-  const file = `${side}_${score}.png`;
-
-  // même logique que tes logos: dossier img servi avec la page
-  const url = `../img/${file}`;
-
-  imgEl.src = url;
-
-  // debug utile si ça 404
-  imgEl.onerror = () => {
-    console.warn(`[BO IMG] not found: ${url}`);
-    imgEl.onerror = null;
-    imgEl.src = `../img/${side}_0.png`; // fallback
-  };
-}
-
-function setBo5Image(imgEl, side, score) {
-  // side = "left" | "right"
-  const file = `${side}_${score}3.png`;
-
-  // même logique que tes logos: dossier img servi avec la page
-  const url = `../img/${file}`;
-
-  imgEl.src = url;
-
-  // debug utile si ça 404
-  imgEl.onerror = () => {
-    console.warn(`[BO IMG] not found: ${url}`);
-    imgEl.onerror = null;
-    imgEl.src = `../img/${side}_0.png`; // fallback
-  };
-}
-
-
-// --- LOGIQUE LPTE ---
 
 const tick = async () => {
   const data = await window.LPTE.request({
@@ -75,58 +28,115 @@ const tick = async () => {
 
   if (data.state === 'READY') {
     displayTeams(data.teams, data.bestOf)
+  } else {
+    teamsContainer.forEach((t) => {
+      t.style.display = 'none'
+    })
   }
 }
 
-const updateTeams = (data) => {
+const update = (data) => {
   if (data.state === 'READY') {
     displayTeams(data.teams, data.bestOf)
+  } else {
+    teamsContainer.forEach((t) => {
+      t.style.display = 'none'
+    })
   }
 }
 
-// Initialisation
 window.LPTE.onready(() => {
-  // Charge les données initiales
   tick()
-  
-  // Écoute uniquement les mises à jour d'équipes
-  window.LPTE.on(namespace, 'update', updateTeams)
+  window.LPTE.on(namespace, 'update', update)
 })
 
+function updatePips(team, score){
+  const pips = document.querySelectorAll(`#${team}-pips .pip`);
 
-// --- FONCTION D'AFFICHAGE ---
+  pips.forEach((pip, i) => {
+    if (i < score) {
+      pip.classList.add("filled");
+    } else {
+      pip.classList.remove("filled");
+    }
+  });
+}
 
 function displayTeams(teams, bestOf) {
   teamsContainer.forEach((t) => {
     t.style.display = 'flex'
   })
 
-  // Standings / Scores textuels
-  blueStanding.innerText = teams.blueTeam.standing !== undefined ? teams.blueTeam.standing : teams.blueTeam.score + "-" + teams.redTeam.score;
-  redStanding.innerText = teams.redTeam.standing !== undefined ? teams.redTeam.standing : teams.redTeam.score + "-" + teams.blueTeam.score;
+  blueName.innerHTML = teams.blueTeam.name
+  blueScore.innerHTML = teams.blueTeam.score
+  updatePips("blue", teams.blueTeam.score)
+  blueLogo.src = "../img/" + teams.blueTeam.logo
+  // resizeText(blueName)
 
-  // Noms d'équipe : Priorité au TAG, sinon Nom complet
-  blueName.innerText = teams.blueTeam.tag || teams.blueTeam.name
-  redName.innerText = teams.redTeam.tag || teams.redTeam.name
+  redName.innerHTML = teams.redTeam.name
+  redScore.innerHTML = teams.redTeam.score
+  updatePips("red", teams.redTeam.score)
+  redLogo.src = "../img/" + teams.redTeam.logo
+  // resizeText(redName)
 
-  // Logos
-  blueLogo.src = `http://${server}/pages/op-module-teams/img/${teams.blueTeam.logo}`
-  redLogo.src = `http://${server}/pages/op-module-teams/img/${teams.redTeam.logo}`
+  redName.classList.remove('outline')
+  blueName.classList.remove('outline')
 
-  // Affichage des carrés de BO (Best Of)
-  if (bestOf > 3) {
+  if (bestOf > 2) {
     blueScore.style.display = 'block'
     redScore.style.display = 'block'
-    setBo5Image(blueScore, 'left', teams.blueTeam.score);
-    setBo5Image(redScore, 'right', teams.redTeam.score);
-  } else if (bestOf > 1) {
-    blueScore.style.display = 'block'
-    redScore.style.display = 'block'
-    setBo3Image(blueScore, 'left', teams.blueTeam.score);
-    setBo3Image(redScore, 'right', teams.redTeam.score);
-
   } else {
     blueScore.style.display = 'none'
     redScore.style.display = 'none'
+  }
+}
+
+const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
+
+const resizeText = (parent) => {
+  let i = 20 // let's start with 12px
+  let overflow = false
+  const maxSize = 25 // very huge text size
+
+  while (!overflow && i < maxSize) {
+    parent.style.fontSize = `${i}px`
+    overflow = isOverflown(parent)
+    if (!overflow) i++
+  }
+
+  // revert to last state where no overflow happened:
+  parent.style.fontSize = `${i - 1}px`
+}
+
+function displayPoints(bestOf, blueTeam, redTeam) {
+  const pointsToWin = Math.ceil(bestOf / 2)
+  for (let i = 0; i < 5; i++) {
+    const point = i + 1
+
+    const setTeamPoints = (teamName, teamData) => {
+      const selector = document.getElementById(`point-${teamName}-${point}`)
+      if (teamData.score >= point) {
+        // Point scored, make visible
+        selector.style.display = 'block'
+        // selector.style.visibility = 'unset'
+        selector.classList.remove('empty')
+      } else {
+        // is this point possible to make?
+        if (point > pointsToWin) {
+          // no, completely not display
+          selector.style.display = 'none'
+          // selector.style.visibility = 'unset'
+          selector.classList.remove('empty')
+        } else {
+          // yes, only soft hide
+          // selector.style.visibility = 'hidden'
+          selector.style.display = 'block'
+          selector.classList.add('empty')
+        }
+      }
+    }
+
+    setTeamPoints('blue', blueTeam)
+    setTeamPoints('red', redTeam)
   }
 }

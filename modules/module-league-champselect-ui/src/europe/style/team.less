@@ -8,7 +8,7 @@
   .TeamName {
     font-size: 40px;
     color: black;
-    font-family: 'Acumin Black', sans-serif;
+    font-family: 'Coconat Regular', sans-serif;
     margin-top: -15px;
 
     &.WithoutCoaches {
@@ -26,7 +26,7 @@
     font-size: 60px;
     margin-top: -20px;
     color: white;
-    font-family: 'Acumin Black', sans-serif;
+    font-family: 'Saira Condensed', sans-serif;
     width: var(--box-ban-height);
     text-align: center;
     height: calc(100% + 23px);
@@ -41,38 +41,22 @@
     .TeamScore {
       border-right: none;
     }
-    .BansContainer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-  
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: stretch;
-  
-      padding-left: 49px;
-      padding-right: 0;
-      box-sizing: border-box;
+
+    .Bans {
+      justify-content: flex-end;
+      background-color: transparent;
+      border: none;
+      left: 410px;
+      transform: translateY(-40px);
+
+      .Ban {
+        border-left: solid transparent var(--border-width);
+
+        .BanImage.Active::before {
+          background-image: linear-gradient(to left, var(--color-blue) 0%, rgba(0, 0, 0, 0) 50%, var(--color-blue) 100%);
+        }
+      }
     }
-    // .Bans {
-    //   // justify-content: flex-end;
-    //   background-color: transparent;
-    //   border: none;
-    //   // left: 410px;
-    //   // left: 0;
-    //   // transform: translateY(-40px);
-
-    //   .Ban {
-    //     border-left: solid transparent var(--border-width);
-
-    //     .BanImage.Active::before {
-    //       background-image: linear-gradient(to left, var(--color-blue) 0%, rgba(0, 0, 0, 0) 50%, var(--color-blue) 100%);
-    //     }
-    //   }
-    // }
 
     .Picks {
       .Pick {
@@ -96,51 +80,20 @@
       border-left: 3px solid transparent;
     }
 
-    .BansContainer {
-      position: absolute;
-      top: 0;
-      left: 0;          // important: on ancre la ligne sur toute la largeur
-      right: 0;
-      width: 100%;
-  
-      display: flex;
-      flex-direction: row-reverse;   // ban1 côté droit
-      justify-content: flex-start;   // (row-reverse => flex-start = droite visuelle)
-      align-items: stretch;
-  
-      padding-right: 46px;           // ton X-top
-      padding-left: 0;
-      box-sizing: border-box;
-    }  
-    .BanSkewMask {
-      transform: skewX(-@banSkewAngle);
-    }
-  
-    .BanSkewMask img {
-      transform:
-        translate(-50%, -50%)
-        skewX(@banSkewAngle)
-        scaleX(@invCos);
-    }
-  
-    .BanSlot::before {
-      transform: skewX(-@banSkewAngle);
-    }
-    // .Bans {
-    //   background-color: transparent;
-    //   border: solid transparent var(--border-width);
-    //   // right: 410px;
-    //   // right: 0;
-    //   // transform: translateY(-48px);
+    .Bans {
+      background-color: transparent;
+      border: solid transparent var(--border-width);
+      right: 410px;
+      transform: translateY(-48px);
 
-    //   .Ban {
-    //     border-right: solid transparent var(--border-width);
+      .Ban {
+        border-right: solid transparent var(--border-width);
 
-    //     .BanImage.Active::before {
-    //       background-image: linear-gradient(to left, var(--color-red) 0%, rgba(0, 0, 0, 0) 50%, var(--color-red) 100%);
-    //     }
-    //   }
-    // }
+        .BanImage.Active::before {
+          background-image: linear-gradient(to left, var(--color-red) 0%, rgba(0, 0, 0, 0) 50%, var(--color-red) 100%);
+        }
+      }
+    }
 
     .Picks {
       .Pick {
@@ -157,4 +110,3 @@
     }
   }
 }
-

@@ -11,39 +11,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
   </head>
   <body class="module-teams-ingameBU-gfx">
-    <!-- BLUE -->
-    <div id="ingame-blue" class="ingame-side ingame-side--blue" data-has-bo="1">
-      <div id="blue-name" class="ingame-name"></div>
-
-      <div class="ingame-meta">
-        <div id="blue-standing" class="ingame-standing"></div>
-        <div class="bo-crop">
-          <img id="blue-bo" class="ingame-bo" src="./img/left_0.png" alt="">
-        </div>
+    <div id="tag-container">
+      <div id="blue-tag" class="blue tag"></div>
+      <div id="red-tag" class="red tag"></div>
+    </div>
+    <div id="name-container">
+      <div id="blue-name" class="blue name"></div>
+      <div id="red-name" class="red name"></div>
+    </div>
+    <div id="logo-container">
+      <img id="logo-red"  class="blue logo" src="../img/Pandore.png"  alt="">
+      <img id="logo-blue" class="red logo" src="../img/Mandragora.png" alt="">
+    </div>
+    <div id="point-container">
+      <div class="points-team points-blue">
+        <div class="point point-blue" id="point-blue-1"></div>
+        <div class="point point-blue" id="point-blue-2"></div>
+        <div class="point point-blue" id="point-blue-3"></div>
+        <div class="point point-blue" id="point-blue-4"></div>
+        <div class="point point-blue" id="point-blue-5"></div>
+      </div>
+      <div class="points-team points-red">
+        <div class="point point-red" id="point-red-1"></div>
+        <div class="point point-red" id="point-red-2"></div>
+        <div class="point point-red" id="point-red-3"></div>
+        <div class="point point-red" id="point-red-4"></div>
+        <div class="point point-red" id="point-red-5"></div>
       </div>
     </div>
-
-    <!-- RED -->
-    <div id="ingame-red" class="ingame-side ingame-side--red" data-has-bo="1">
-      <div id="red-name" class="ingame-name"></div>
-
-      <div class="ingame-meta">
-        <div id="red-standing" class="ingame-standing"></div>
-        <div class="bo-crop">
-        <img id="red-bo" class="ingame-bo" src="./img/right_0.png" alt="" />
-        </div>
-      </div>
-    </div>
-    <div class="team-logo-bottom team-logo-bottom--blue">
-      <img id="blue-logo-big" src="" alt="">
-    </div>
-    
-    <div class="team-logo-bottom team-logo-bottom--red">
-      <img id="red-logo-big" src="" alt="">
-    </div>
-    
-    <img src="./img/BANDEAUX.png" alt="" id="staticSB" style="position: absolute;z-index: -1;overflow: hidden;">
-    <img src="./img/FOND_LOGOS.png" alt="" id="staticBB" style="position: absolute;z-index: -1;overflow: hidden;">
+    <img src="./img/ui.png" alt="" id="staticSB" style="position: absolute;z-index: -1;overflow: hidden;">
 
     <script src="js/ingameBU.js" defer></script>
   </body>

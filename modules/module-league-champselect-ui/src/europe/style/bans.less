@@ -1,188 +1,73 @@
 
-// .Bans {
-//   position: absolute;
-//   bottom: 0;
-//   width: 260px;
-//   height: calc(2*var(--box-ban-height));
-//   display: flex;
-
-//   .BansContainer{
-//     // position: absolute;
-//     // bottom: 100px;
-//     display: flex;
-//     flex-direction: row;
-//     margin-bottom: -15px;
-  
-//   .Ban {
-//     display: block;
-//     // width: 60px;
-//     // height: 60px;
-//     overflow: hidden;
-//     position: relative;
-
-//     img {
-//       width: 110%;
-//       height: 110%;
-//       object-fit: cover;
-//       object-position: calc(-1 * var(--ban-image-crop)) calc(-1 * var(--ban-image-crop) + 1px);
-//       overflow: hidden;
-//     }
-
-//     .BanImage.Active::before {
-//       content: "";
-//       position: absolute;
-//       top: 0;
-//       left: 0;
-//       width: 100%;
-//       height: 91%;
-//       opacity: 0.5;
-//       animation: pulsate-ban 1.5s infinite;
-//     }
-//   }
-//   }
-
-//   .Spacing {
-//     width: var(--box-ban-spacer);
-//   }
-// }
-
-// &.TeamRed .BansContainer{
-//   flex-direction: row-reverse;
-//   // bottom: 0;
-// }
-
-// .BansWrapper {
-//   overflow: hidden;
-// }
-
-// .BansBox {
-//   display: flex;
-// }
-
-
-// @keyframes pulsate-ban {
-//   0% {
-//     opacity: 1; // 0.7
-//   }
-//   50% {
-//     opacity: 0.3;
-//   }
-//   100% {
-//     opacity: 1; // 0.7
-//   }
-// }
-
-@banW: 122px;
-@banH: 126px;
-@banY: 903px;
-@banSkewAngle: 13.5deg; // arctan(29/124) ≈ 13.2°
-
-/* Le wrapper global au bon Y */
-.BansWrapper {
-  position: absolute;
-  top: @banY;
-  left: 0;
-  right: 0;
-  height: @banH;
-  pointer-events: none;
-}
-
-/* Container bans (flex) */
 .Bans {
   position: absolute;
-  inset: 0;
-  display: block;
-  background: transparent;
-  border: none;
-}
-
-/* La ligne qui contient bans + gaps */
-.BansContainer {
-  position: absolute;
-  top: 0;
-  height: @banH;
+  bottom: 0;
+  width: 260px;
+  height: calc(2*var(--box-ban-height));
   display: flex;
-  align-items: stretch;
-  padding-left: 51px;
-  flex-direction: row;
-}
 
-@invCos: 1.03;          // ~ 1/cos(13.2°) ≈ 1.027 => on arrondit
-
-.BanSlot {
-  position: relative;
-  width: @banW;
-  height: @banH;
-  flex: 0 0 @banW;
-
-  /* IMPORTANT: ne clippe PAS ici, sinon le cadre skew peut être mangé */
-  overflow: visible;
-}
-
-/* === MASQUE SKEWÉ : c’est lui qui découpe l’image === */
-.BanSkewMask {
-  position: absolute;
-  inset: 0;
-
-  /* Le clip se fait ici */
-  overflow: hidden;
-  transform-origin: top left;
-  transform: skewX(@banSkewAngle);
-}
-
-/* Le root rendu par <Ban/> doit remplir le masque */
-.BanSkewMask > * {
-  position: absolute;
-  inset: 0;
-}
-
-/* === Image: contre-skew pour rester droite === */
-@banZoom: 1.30;   // 110% (ajuste 1.05–1.15)
-@invCos: 1.03;    // 1/cos(13.2°) ≈ 1.027
-
-.BanSkewMask img {
-  position: absolute;
-
-  /* centre physique */
-  left: 50%;
-  top: 50%;
-
-  /* on donne un peu plus grand que le masque */
-  width: calc(100% * @banZoom);
-  height: calc(100% * @banZoom);
-
-  display: block;
-  object-fit: cover;
-  object-position: center;
-
-  /* keep straight + compensate skew + keep centered */
-  transform-origin: center center;
-  transform:
-    translate(-50%, -50%)
-    skewX(-@banSkewAngle)
-    scaleX(@invCos);
-
-  will-change: transform;
-}
-
-/* === CONTOUR SKEWÉ (par-dessus, sans clip) === */
-.BanSlot::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  box-sizing: border-box;
-  border: 3px solid #ecdcbb;
+  .BansContainer{
+    // position: absolute;
+    // bottom: 100px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -15px;
   
-  transform-origin: top left;
-  transform: skewX(@banSkewAngle);
+  .Ban {
+    display: block;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
 
-  pointer-events: none;
-  z-index: 5;
-}
-/* Spacer (écarts fixes) */
-.BanGap {
-  height: 1px;         // n'a pas d'importance, c'est juste un séparateur
-  flex: 0 0 auto;
+    img {
+      width: 110%;
+      height: 110%;
+      object-fit: cover;
+      object-position: calc(-1 * var(--ban-image-crop)) calc(-1 * var(--ban-image-crop) + 1px);
+      overflow: hidden;
+    }
+
+    .BanImage.Active::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 91%;
+      opacity: 0.5;
+      animation: pulsate-ban 1.5s infinite;
+    }
+  }
+  }
+
+  .Spacing {
+    width: var(--box-ban-spacer);
+  }
 }
 
+&.TeamRed .BansContainer{
+  flex-direction: row-reverse;
+  // bottom: 0;
+}
+
+.BansWrapper {
+  overflow: hidden;
+}
+
+.BansBox {
+  display: flex;
+}
+
+
+@keyframes pulsate-ban {
+  0% {
+    opacity: 1; // 0.7
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1; // 0.7
+  }
+}

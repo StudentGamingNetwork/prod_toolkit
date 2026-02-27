@@ -8,11 +8,11 @@ async function initUi() {
 
   const location = `http://${server}/pages/op-module-teams/gfx`
 
-  // document.querySelector(
-  //   '#draft'
-  // ).value = `${location}/draft-gfx.html${
-  //   apiKey !== null ? '?apikey=' + apiKey : ''
-  // }`
+  document.querySelector(
+    '#draft'
+  ).value = `${location}/draft-gfx.html${
+    apiKey !== null ? '?apikey=' + apiKey : ''
+  }`
 }
 
 
