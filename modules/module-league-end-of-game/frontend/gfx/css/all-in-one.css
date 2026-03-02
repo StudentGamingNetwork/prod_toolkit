@@ -275,7 +275,7 @@ html, body {
   left: 0;
   height: 70%;
   width: var(--bar-width, 50%);
-  background: linear-gradient(to left, #30D5C8 10%, #08648f 40%, #010e14 100%);
+  background: linear-gradient(to left, #009c4c 10%, #004521 40%, #010e14 100%);  
   border-radius: 3px;
   z-index: 1;
   transition: width 0.7s ease-out;
@@ -306,7 +306,7 @@ html, body {
   left: unset;
   width: var(--bar-width, 50%);
   border-radius: 3px;
-  background:linear-gradient(to left, rgba(255, 51, 102, 0.6), #FF3366);
+  background:linear-gradient(to left,  #fa270c ,#f34a34);
   position: absolute;
 }
 
@@ -438,20 +438,22 @@ html, body {
   width: 100%;
   height: 75px;
 }
+/* background: linear-gradient(to left, #009c4c 10%, #004521 40%, #010e14 100%);  
+background:linear-gradient(to left,  #fa270c ,#f34a34); */
 
 #blueTeamPicks {
-  background-image: linear-gradient(to left, #30D5C8 , #08648f);;
+  background-image: linear-gradient(to right, #009c4c , #004521);;
 }
 
 #redTeamPicks {
-  background-image: linear-gradient(to right, rgba(255, 51, 102, 0.6), #FF3366);
+  background-image: linear-gradient(to right,  #fa270c ,#f34a34);
 }
 
 #blueBan {
-  background: linear-gradient(to right, #30D5C8 10%, #08648f 40%, #010e14 100%);
+  background: linear-gradient(to right, #009c4c 10%, #004521 40%, #010e14 100%);
 }
 #redBan {
-  background: linear-gradient(to left, #FF3366 10%, rgba(255, 51, 102, 0.6) 40%, #010e14 100%);
+  background: linear-gradient(to left, #f34a34 10%, #fa270c 40%, #010e14 100%);
 }
 
 .ban-grid {
@@ -485,11 +487,11 @@ html, body {
 }
 
 #blueTeamPicks {
-  background: linear-gradient(to left, #30D5C8, #08648f);
+  background: linear-gradient(to left, #009c4c , #004521);
 }
 
 #redTeamPicks {
-  background: linear-gradient(to right, rgba(255, 51, 102, 0.6), #FF3366);
+  background: linear-gradient(to right, #fa270c ,#f34a34);
 }
 
 .pick-grid img {

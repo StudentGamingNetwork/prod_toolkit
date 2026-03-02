@@ -38,11 +38,11 @@
 }
 
 #blueTeam {
-  background-color: var(--blue-team);
+  background-color: #004521;
 }
 
 #redTeam {
-  background-color: var(--red-team);
+  background-color: #fa270c;
 }
 
 img {
