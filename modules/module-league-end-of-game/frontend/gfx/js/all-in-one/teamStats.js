@@ -30,7 +30,7 @@ function displayTeamStats(teams) {
   towerDiv.querySelector('.stat.red').innerHTML = teams[200].stats.towers
 
   // Drakes
-  // displayDrakes(teams)
+  displayDrakes(teams)
   setUniqueObjectiveIcon('herald', teams[100].stats.riftHerald, teams[200].stats.riftHerald, './img/herald.png');
   // setUniqueObjectiveIcon('atakhan', teams[100].stats.atakhan, teams[200].stats.atakhan, './img/atakkan.png');
   // Elders

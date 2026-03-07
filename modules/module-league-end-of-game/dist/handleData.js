@@ -100,22 +100,22 @@ class EndOfGameData {
     }
     handleTeams() {
         const teams = this.matchData.info.teams;
-        function sumFeatStates(feats) {
-            return Object.values(feats).reduce((total, featObj) => {
-              return total + (featObj.featState || 0);
-            }, 0);
-          }
+        // function sumFeatStates(feats) {
+        //     return Object.values(feats).reduce((total, featObj) => {
+        //       return total + (featObj.featState || 0);
+        //     }, 0);
+        //   }
 
         this.gameDuration = this.matchData.info.gameDuration
         
-        try{
-        let feat_blue_value = sumFeatStates(teams[0].feats)
-        let feat_red_value = sumFeatStates(teams[1].feats)
+        // try{
+        // let feat_blue_value = sumFeatStates(teams[0].feats)
+        // let feat_red_value = sumFeatStates(teams[1].feats)
 
-        this.featTeamId = feat_blue_value < feat_red_value ? 100 : 200
-        } catch(error){
-            console.log(error)
-        }
+        // this.featTeamId = feat_blue_value < feat_red_value ? 100 : 200
+        // } catch(error){
+        //     console.log(error)
+        // }
 
         this.winnerTeamId = teams[0].win ? 100 : 200
 
