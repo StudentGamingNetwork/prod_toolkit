@@ -7,7 +7,7 @@
     "backend": "ws://localhost:8999"
   },
   "module-league-static": {
-    "last-downloaded-version": "16.4.1"
+    "last-downloaded-version": "16.5.1"
   },
   "module-league-state": {
     "recordChampselect": true

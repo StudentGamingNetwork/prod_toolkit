@@ -4,11 +4,15 @@ exports.convertState = void 0;
 const types_1 = require("./types");
 const convertTeam = ({ team, actions, gameState, leagueStatic }) => {
     const newTeam = new types_1.Team();
-    newTeam.picks = team
-        .map((cell) => {
-        var _a;
+    const isInThisTeam = (cellId) => team.filter((cell) => cell.cellId === cellId).length !== 0;
+    newTeam.picks = actions
+        .filter((action) => action.type === 'pick' && isInThisTeam(action.actorCellId))
+        .map((action) => {
         const currentAction = actions.find((action) => !action.completed);
-        const summonerSearch = (_a = gameState.lcu.lobby.members) === null || _a === void 0 ? void 0 : _a.find((member) => member.summonerId === cell.summonerId);
+        const cell = team.find(c => c.cellId === action.actorCellId);
+        /* const summonerSearch = gameState.lcu.lobby.members?.find(
+          (member: any) => member.summonerId === cell.summonerId
+        ) */
         /* cell.cellId = summonerSearch ? summonerSearch.sortedPosition : cell.cellId */
         const pick = new types_1.Pick(cell.cellId);
         pick.spell1 = {
@@ -23,13 +27,13 @@ const convertTeam = ({ team, actions, gameState, leagueStatic }) => {
                 ? `/serve/module-league-static/img/summoner-spell/${cell.spell2Id}.png`
                 : ''
         };
-        const championSearch = leagueStatic.champions.find((c) => c.key === cell.championId.toString());
+        const championSearch = leagueStatic.champions.find((c) => c.key === action.championId.toString());
         let champion;
         if (championSearch !== undefined) {
             champion = championSearch;
         }
         pick.champion = {
-            id: cell.championId,
+            id: action.championId,
             name: champion ? champion.name : '',
             idName: champion ? champion.id.toString() : '',
             loadingImg: champion
@@ -58,7 +62,6 @@ const convertTeam = ({ team, actions, gameState, leagueStatic }) => {
         .sort((a, b) => {
         return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
     });
-    const isInThisTeam = (cellId) => team.filter((cell) => cell.cellId === cellId).length !== 0;
     let isBanDetermined = false;
     newTeam.bans = actions
         .filter((action) => action.type === 'ban' && isInThisTeam(action.actorCellId))
@@ -68,8 +71,6 @@ const convertTeam = ({ team, actions, gameState, leagueStatic }) => {
             isBanDetermined = true;
             ban.isActive = true;
             newTeam.isActive = true;
-            ban.champion = {};
-            return ban;
         }
         const championSearch = leagueStatic.champions.filter((c) => c.key === action.championId.toString());
         let champion;
