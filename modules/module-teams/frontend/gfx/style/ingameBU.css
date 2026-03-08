@@ -224,13 +224,24 @@
 
 }
 
-.team-logo-bottom--blue{
+/* .team-logo-bottom--blue{
   left: 307px;
   top: 875px;
 }
 
 .team-logo-bottom--red{
   left: 1353px;
+  top: 875px;
+} */
+
+
+.team-logo-bottom--blue{
+  left: 320px;
+  top: 875px;
+}
+
+.team-logo-bottom--red{
+  left: 1343px;
   top: 875px;
 }
 
