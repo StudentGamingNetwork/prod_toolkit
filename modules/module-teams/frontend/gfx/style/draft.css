@@ -1,308 +1,185 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
-
+/* ====== FONTS ====== */
 @font-face {
-  font-family: 'Futura';
-  src: url(./fonts/Futura.ttf);
-}
-@font-face {
-  font-family: 'Futura-bold';
-  src: url(./fonts/Futura-Bold.ttf);
-}
-@font-face{
-  font-family: 'Roc Grotesk';
-  src:url(./fonts/rocgroteskcomp-extrabold.otf);
-}
-@font-face {
-  font-family: "Coconat Bold";
-  src: url("./fonts/Coconat-BoldExt.woff"),
-       url("./fonts/Coconat-BoldExt.woff2");
-}
-@font-face {
-  font-family: "Coconat Regular";
-  src: url("./fonts/Coconat-Regular.woff"),
-       url("./fonts/Coconat-Regular.woff2");
-}
-@font-face {
-  font-family: "Murmure";
-  src: url("./fonts/LeMurmure-Regular.woff"),
-       url("./fonts/LeMurmure-Regular.woff2");
-}
-
-@font-face {
-  font-family: "Grotesk Compressed Extrabold";
-  src: url("./fonts/Kostic\ -\ Roc\ Grotesk\ Compressed\ ExtraBold.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
+  font-family: "Acumin VF";
+  src: url("./fonts/Acumin\ VF\ Default.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 25% 125%;
+  font-style: normal italic;
   font-display: swap;
 }
-
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Grotesk Compressed Extrabold';
+@font-face {
+  font-family: "Acumin Black";
+  src: url("./fonts/Acumin_Pro_ExtraCondensed_Black_Italic.otf");
+  font-weight: 100 900;
+  font-stretch: 25% 125%;
+  font-style: normal italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro 75 Bold";
+  src: url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.woff2") format("woff2"),
+       url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.ttf") format("truetype");
 }
 
-.module-teams-talk-gfx {
-  width: 1920px;
-  height: 1080px;
-  overflow: hidden;
-  font-size: 15px;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
-  /* font-variation-settings:
-    "wdth" 81.2,
-    "YTLC" 500; */
+:root {
+  /* Layout global */
+  --canvasW: 1920px;
+  --topbarY: 2px;
+  --sideMargin: 28px;
+  --panelW: 590px;
+  --gapMid: 684px;
+
+  /* Tailles internes */
+  --logoSize: 160px;
+  --nameH: 90px;
+  --boW: 90px;
+  --boH: 90px;
+  --standingW: 60px;
+
+  /* Couleurs */
+  --inkDark: #2d2e2e;
+  /* Note : Les couleurs des timers sont maintenant gérées dans le module React (timer.less) */
+
+  /* Gaps internes */
+  --g1: 40px;   /* logo <-> name */
+  --g2: 21px;   /* name <-> bo */
+  --g3: 26px;   /* bo <-> standings */
+}
+
+/* Reset de base */
+body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+
+/* ====== TOPBAR LAYOUT ====== */
+.topbar {
   position: absolute;
-}
-
-.bg-image {
-  z-index: 0;
-  position: absolute;
-  width: 1920px;
-  height: 1080px;
-}
-
-.container {
-  height: fit-content;
-  width: 1920px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 15px;
-  position: absolute;
-}
-
-.blue {
-  color: white;
-}
-
-.red {
-  color: white;
-}
-
-.team {
-  display: none;
-  width: 950px;
-  align-items: top;
-  position: absolute;
-  top: 5px;
-  filter: drop-shadow(4px 4px 3px rgba(0,0,0,0.5));
-  
-  font-size: 30px;
-  /* font-optical-sizing: auto; */
-  font-weight: 800;
-  font-style: normal;
-  /* font-variation-settings:
-    "wdth" 81.2,
-    "YTLC" 500; */
-}
-
-#blue-team {
+  top: var(--topbarY);
   left: 0;
-  margin-left: 40px;
+  width: var(--canvasW);
+  z-index: 100;
 }
 
-#red-team {
-  flex-direction: row-reverse;
-  right: 0;
-  margin-right: 40px;
+.topbar-inner {
+  position: relative;
+  height: 160px;
+  margin: 0 var(--sideMargin);
+  display: grid;
+  grid-template-columns: var(--panelW) var(--gapMid) var(--panelW);
+  align-items: center;
 }
 
-.score {
-  font: 'Futura';
-  text-transform: uppercase;
-  line-height: 1;
+/* ====== ZONE CENTRALE (GAP) ====== */
+/* Juste une zone vide pour maintenir l'espacement de la grille */
+.topbar-gap {
+  width: var(--gapMid);
+  height: 100px;
+  /* Vide : les timers sont affichés par l'iframe en dessous */
 }
 
-.score {
-  align-self: top;
-  text-align: center;
-  margin-top: 45px;
-  width: 40px;
-  font-size: 40px;
-  color: white;
-}
-
-#blue-score {
-  transform: translateX(-30px);
-}
-#red-score {
-  transform: translateX(30px);
-}
-
-.tag.outline {
-  -webkit-text-stroke-width: 3px;
-}
-
-.outline {
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: inherit;
-}
-
-.logo-container{
-  width: 156px;
+/* ====== PANELS (LEFT & RIGHT) ====== */
+.team-panel {
+  width: var(--panelW);
+  height: var(--nameH);
   display: flex;
-  align-items: top;
-  justify-content: center;}
-
-.logo {
-    margin-top: 5px;
-    max-width: 125px;
-    max-height: 125px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-/* #red-logo {
-  margin-inline-end: 50px;
-  margin-left: 25px;
+  align-items: center;
+  min-width: 0;
 }
-#blue-logo {
-  margin-inline-start: 50px;
-  margin-right: 25px;
-} */
 
-.name {
-  /* line-height: 1; */
+.panel-left { justify-content: flex-start; }
+.panel-right { justify-content: flex-end; }
+
+/* ====== LOGO ====== */
+.team-logo {
+  width: var(--logoSize);
+  height: var(--logoSize);
+  object-fit: contain;
+  padding: 10px;
+  flex: 0 0 auto;
+}
+
+/* ====== NAME ====== */
+.team-name {
+  height: var(--nameH);
+  display: flex;
+  align-items: center;
+  font-family: "Acumin Black", sans-serif;
+  font-size: 90px;
+  color: var(--inkDark);
   text-transform: uppercase;
-  align-self: center;
-  font-style: bold;
-  font-size: 70px;
-  width: 559px;
-  max-height: 150px;
-  overflow: hidden;
-  color: black;
-  word-wrap: break-word;  
+  
+  /* Padding horizontal pour éviter que l'italique ne soit coupé */
+  padding: 0 12px; 
+  
+  flex: 1 1 auto; /* Prend tout l'espace disponible */
+  min-width: 0;
 }
 
-#blue-name {
-  margin-right: 0;
+/* Gestion de l'ellipsis sur le span interne */
+.team-name span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+/* --- Marges Miroir --- */
+/* GAUCHE : Logo [gap] Nom */
+.panel-left .team-name {
+  text-align: left;
+  justify-content: flex-start;
+  margin-left: calc(var(--g1) - 12px); 
+}
+
+/* DROITE : Nom [gap] Logo */
+.panel-right .team-name {
+  text-align: right;
+  justify-content: flex-end;
+  margin-right: calc(var(--g1) - 12px); 
+}
+
+/* ====== BO ICON ====== */
+.bo-icon {
+  width: var(--boW);
+  height: var(--boH);
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+/* GAUCHE : Nom [gap] BO */
+.panel-left .bo-icon { margin-left: var(--g2); }
+
+/* DROITE : BO [gap] Nom */
+.panel-right .bo-icon { margin-right: var(--g2); }
+
+/* ====== STANDING ====== */
+.standing {
+  width: var(--standingW);
+  flex: 0 0 var(--standingW);
+  font-family: "Neue Haas Grotesk Display Pro 75 Bold", Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--inkDark);
+}
+
+/* GAUCHE : BO [gap] Standing */
+.panel-left .standing { 
+  margin-left: var(--g3);
   text-align: left;
 }
 
-#red-name {
-  margin-left: 0;
+/* DROITE : Standing [gap] BO */
+.panel-right .standing { 
+  margin-right: var(--g3);
   text-align: right;
 }
 
-.has-scores #blue-tag {
-  margin-right: 0;
-}
-.has-scores #red-tag {
-  margin-left: 0;
-}
-
+/* ====== DRAFT IFRAME ====== */
 .draft-overlay {
-  position: absolute;
-  left: 24px;
-  top: 0;
-  bottom: 0;
-  z-index: 99;
-  overflow: hidden;
-  border: none;
-}
-#draft_iframe {
-  border: none;
-}
-/* Variables utiles */
-:root{
-  --topbarW: 1920px;
-  --gapMid: 850px;      /* largeur du trou du milieu */
-  --logoBlockW: 110px;  /* largeur identique des blocs logo+pips */
-  --logoSize: 110px;
-  --circleLogoSize: 130px;
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
 }
 
-/* Barre */
-.topbar{
-  position:absolute; top:35px; left:50%; transform:translateX(-50%);
-  width:var(--topbarW);
-  padding:10px 18px;
-  border-radius:20px;
-  display:grid;
-  grid-template-columns: 1fr var(--gapMid) 1fr; /* G | centre | D */
-  align-items:center;
-  /* background: rgba(0,0,0,.25);
-  border: 1px solid rgba(255,255,255,.18);
-  backdrop-filter: blur(4px); */
-}
-.topbar-gap{ height: var(--logoSize); }
-
-/* Panneaux G/D : même grille interne mirroir */
-.team-panel{
-  display:grid;
-  align-items:center;
-  column-gap: 24px;
-  color:#fff;
-}
-/* Gauche : [nom][logo] */
-.panel-left{
-  grid-template-columns: minmax(0,1fr) var(--logoBlockW);
-  text-align: center;
-  margin-left: 20px;
-}
-/* Droite : [logo][nom] */
-.panel-right{
-  grid-template-columns: var(--logoBlockW) minmax(0,1fr);
-  text-align: center;
-  margin-right: 20px;
-
-}
-
-/* Bloc logo + pips : largeur fixe identique gauche/droite */
-.team-logo-block{
-  width: var(--logoBlockW);
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-  
-}
-
-#blue-team .team-logo-block{
-  filter: drop-shadow(5px 5px 15px #004521);
-}
-
-#red-team .team-logo-block{
-  filter: drop-shadow(5px 5px 15px #fa270c);
-}
-
-.logo-circle{
-  width: var(--circleLogoSize); height: var(--circleLogoSize);
-  border-radius:20%;
-  background: rgba(0, 0, 0,.2);
-  border: 1px solid rgba(255,255,255,.18);
-  display:grid; place-items:center; overflow: hidden;
-}
-.logo-circle .logo{ width: var(--logoSize); height: var(--logoSize); object-fit:contain; }
-
-/* Nom d’équipe : même style à G/D, ellipse si trop long */
-.team-name{
-  text-transform:uppercase;
-  font-weight:800; 
-  font-size:65px; 
-  line-height:1;
-  white-space:nowrap; 
-  overflow:hidden; 
-  text-overflow:ellipsis;
-  color: black;
-  text-shadow:0 2px 2px rgba(0,0,0,.35);
-  justify-self: stretch;   /* occupe toute la colonne */
-  transform: translateY(72px);
-}
-
-/* Pips sous le logo (identiques des deux côtés) */
-.pips{ display:flex; gap:10px; }
-.pip{ width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,.9); }
-.pip.filled{ background:#fff; }
-
-/* (Option) si ton ancien bandeau existe encore */
-.container{ display:none; }
-
-.sr-only {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+.draft-overlay img {
+    pointer-events: auto;
 }

@@ -4,99 +4,47 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Draft gfx</title>
+    <title>Draft GFX</title>
+    
     <script src="/static/main-bundle.js"></script>
     <link rel="stylesheet" href="style/draft.css" />
     <link rel="stylesheet" href="/pages/op-plugin-theming/active/index.css" />
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet"> -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:wght@100..900&display=swap" rel="stylesheet">
   </head>
-    <!-- <div class="container">
-      <div id="blue-team" class="team">
-        <div id="blue-logo-container" class="logo-container">
-          <img id="blue-logo" class="logo" src="../img/Mandragora.png"/>
-        </div>
-        <div id="blue-name" class="name"></div>
-        <div id="blue-score" class="score"></div>
-      </div>
-      <div id="red-team" class="team">
-        <div id="red-logo-container" class="logo-container">
-          <img id="red-logo" class="logo" src="../img/Pandore.png"/>
-        </div>
-        <div id="red-name" class="name"></div>
-        <div id="red-score" class="score"></div>
-      </div>
-    </div>     -->
+  
+  <body class="module-teams-draft-gfx">
+    
     <div class="topbar">
-      <!-- LEFT / BLUE -->
-      <div id="blue-team" class="team-panel panel-left">
-        <div id="blue-name" class="team-name"></div>
-        <div id="blue-score" class="score sr-only">1</div>
-        <div class="team-logo-block">
-          <div class="logo-circle">
-            <img id="blue-logo" class="logo" src="../img/Mandragora.png" alt="">
-          </div>
-          <div class="pips" id="blue-pips">
-            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
-          </div>
+      <div class="topbar-inner">
+        
+        <div id="blue-team" class="team-panel panel-left">
+          <img id="blue-logo" class="team-logo" src="../img/Mandragora.png" alt="Blue Logo">
+          <div id="blue-name" class="team-name"><span>BLUE TAG</span></div>
+          <img id="blue-bo" class="bo-icon" src="./img/left_0.png" alt="">
+          <div id="blue-standing" class="standing">0-0</div>
         </div>
-      </div>
     
-      <!-- MIDDLE GAP (timer/patch si besoin) -->
-      <div class="topbar-gap"></div>
+        <div class="topbar-gap"></div>
     
-      <!-- RIGHT / RED -->
-      <div id="red-team" class="team-panel panel-right">
-        <div class="team-logo-block">
-          <div class="logo-circle">
-            <img id="red-logo" class="logo" src="../img/Pandore.png" alt="">
-          </div>
-          <div class="pips" id="red-pips">
-            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
-          </div>
+        <div id="red-team" class="team-panel panel-right">
+          <div id="red-standing" class="standing">0-0</div>
+          <img id="red-bo" class="bo-icon" src="./img/right_0.png" alt="">
+          <div id="red-name" class="team-name"><span>RED TAG</span></div>
+          <img id="red-logo" class="team-logo" src="../img/Pandore.png" alt="Red Logo">      
         </div>
-        <div id="red-name" class="team-name"></div>
-        <div id="red-score" class="score sr-only">2</div>
+
       </div>
     </div>
 
     <div id="draft" class="draft-overlay">
-      <iframe id="draft_iframe" title="draft_overlay" width="1920" height="1080" 
-      src =""></iframe>
+      <img src="./img/Draft.png" style="z-index: 2; position: absolute; top: 0;" alt="Overlay Frame"/>
+      
+      <iframe id="draft_iframe" title="draft_overlay" width="1920" height="1080" src="" style="z-index: 10;"></iframe>
     </div>
 
-    <!-- <img src="./img/Screenshot 2025-09-22 13-47-38.png" alt="" id="staticSB" style="position: absolute;z-index: -1;overflow: hidden; top: 0;"> -->
-
     <script src="js/draft.js" defer></script>
-    <script>
-      function updatePips(team) {
-        const scoreEl = document.getElementById(`${team}-score`);
-        const pips = document.querySelectorAll(`#${team}-pips .pip`);
-        if (!scoreEl) return;
-      
-        const score = parseInt(scoreEl.textContent.trim(), 10) || 0;
-      
-        pips.forEach((pip, i) => {
-          if (i < score) {
-            pip.classList.add("filled");
-          } else {
-            pip.classList.remove("filled");
-          }
-        });
-      }
-      
-      // maj des 2 équipes
-      function refreshAllPips() {
-        updatePips("blue");
-        updatePips("red");
-      }
-      
-      // premier rendu
-      refreshAllPips();
-      
-      // si tes scores changent via JS, rappelle refreshAllPips()
-      </script>  
-    </body>
+  </body>
 </html>

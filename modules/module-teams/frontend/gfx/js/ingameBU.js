@@ -87,8 +87,8 @@ function setHasBo(rootEl, hasBo) {
 
 function displayTeams(teams, bestOf) {
   // Texte
-  blueName.textContent = teams.blueTeam?.name ?? '';
-  redName.textContent  = teams.redTeam?.name ?? '';
+  blueName.textContent = teams.blueTeam?.tag ?? '';
+  redName.textContent  = teams.redTeam?.tag ?? '';
 
   blueStanding.textContent = teams.blueTeam?.standing ?? '';
   redStanding.textContent  = teams.redTeam?.standing ?? '';

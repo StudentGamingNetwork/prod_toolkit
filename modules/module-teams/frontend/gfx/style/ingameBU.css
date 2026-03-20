@@ -34,14 +34,6 @@
   url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.svg#Neue Haas Grotesk Display Pro 75 Bold")format("svg");
 }
 
-@font-face {
-  font-family: "Grotesk Compressed Extrabold";
-  src: url("./fonts/Kostic\ -\ Roc\ Grotesk\ Compressed\ ExtraBold.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 
 * {
   margin: 0;
@@ -71,8 +63,8 @@
   --inkDark: #2d2e2e;
 
   /* si tu as tes fonts locales, remplace ces familles */
-  --fontTeam: "Grotesk Compressed Extrabold", sans-serif;
-  --fontStanding: "Grotesk Compressed Extrabold", sans-serif;
+  --fontTeam: "Nunito Sans", sans-serif;
+  --fontStanding: "Neue Haas Grotesk Display Pro 75 Bold", sans-serif;
 }
 
 /* ====== CONTENEUR SIDE ======
@@ -81,25 +73,25 @@
 .ingame-side{
   position: absolute;
   top: 0px;
-  width: 460px;
+  width: 389px;
   height: 62px;
 }
 
 /* Blue: ancré à gauche */
 .ingame-side--blue{
-  left: 35px;
+  left: 0px;
 }
 
 /* Red: ancré à droite, layout miroir via positions internes */
 .ingame-side--red{
-  right: 35px;
+  right: 0px;
 }
 
 /* ====== TEAM NAME (X255,Y0,W84,H62) ====== */
 .ingame-name{
   position: absolute;
-  top: 5px;
-  width: 180px;
+  top: 0px;
+  width: 95px;
   height: 62px;
 
   display: flex;
@@ -110,10 +102,10 @@
   line-height: 1;
 
   /* garde le style “topbar-ish”, ajuste la taille si besoin */
-  font-family: "Grotesk Compressed Extrabold", sans-serif;
+  font-family: "Acumin Black", sans-serif;
 
   /* optionnel si la VF l’expose explicitement */
-  font-size: calc(38px);
+  font-size: calc(50px);
 
   color: var(--inkDark);
   text-transform: uppercase;
@@ -220,28 +212,15 @@
 
   object-fit: contain;
   display: block;
-  filter: drop-shadow(5px 5px 15px #1a1a1a);
-
 }
 
-/* .team-logo-bottom--blue{
-  left: 307px;
+.team-logo-bottom--blue{
+  left: 318px;
   top: 875px;
 }
 
 .team-logo-bottom--red{
   left: 1353px;
-  top: 875px;
-} */
-
-
-.team-logo-bottom--blue{
-  left: 320px;
-  top: 875px;
-}
-
-.team-logo-bottom--red{
-  left: 1343px;
   top: 875px;
 }
 
