@@ -4,46 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Draft GFX</title>
-    
+    <title>Draft gfx</title>
     <script src="/static/main-bundle.js"></script>
     <link rel="stylesheet" href="style/draft.css" />
     <link rel="stylesheet" href="/pages/op-plugin-theming/active/index.css" />
-    
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   </head>
-  
   <body class="module-teams-draft-gfx">
-    
-    <div class="topbar">
-      <div class="topbar-inner">
-        
-        <div id="blue-team" class="team-panel panel-left">
-          <img id="blue-logo" class="team-logo" src="../img/Mandragora.png" alt="Blue Logo">
-          <div id="blue-name" class="team-name"><span>BLUE TAG</span></div>
-          <img id="blue-bo" class="bo-icon" src="./img/left_0.png" alt="">
-          <div id="blue-standing" class="standing">0-0</div>
+    <div class="container">
+      <div id="blue-team" class="team">
+        <div id="blue-logo-container" class="logo-container">
+          <img id="blue-logo" class="logo" src="../img/Mandragora.png"/>
         </div>
-    
-        <div class="topbar-gap"></div>
-    
-        <div id="red-team" class="team-panel panel-right">
-          <div id="red-standing" class="standing">0-0</div>
-          <img id="red-bo" class="bo-icon" src="./img/right_0.png" alt="">
-          <div id="red-name" class="team-name"><span>RED TAG</span></div>
-          <img id="red-logo" class="team-logo" src="../img/Pandore.png" alt="Red Logo">      
+        <div id="blue-name" class="name"></div>
+        <div id="blue-score" class="score"></div>
+      </div>
+      <div id="red-team" class="team">
+        <div id="red-logo-container" class="logo-container">
+          <img id="red-logo" class="logo" src="../img/Pandore.png"/>
         </div>
-
+        <div id="red-name" class="name"></div>
+        <div id="red-score" class="score"></div>
       </div>
     </div>
-
     <div id="draft" class="draft-overlay">
-      <img src="./img/Draft.png" style="z-index: 2; position: absolute; top: 0;" alt="Overlay Frame"/>
-      
-      <iframe id="draft_iframe" title="draft_overlay" width="1920" height="1080" src="" style="z-index: 10;"></iframe>
+      <iframe id="draft_iframe" title="draft_overlay" width="1920" height="1080" 
+      src =""></iframe>
     </div>
+
 
     <script src="js/draft.js" defer></script>
   </body>

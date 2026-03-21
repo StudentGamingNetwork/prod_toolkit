@@ -24,7 +24,7 @@ body {
   font-family: "Grotesk Black";
   font-weight: bold;
   font-size: 35px;
-  color: #1a1a1a;
+  color: #ffffff;
 }
 
 .container {
@@ -36,11 +36,11 @@ body {
 
 .caster-box {
   position: absolute;
-  width: 665px;
+  width: 550px;
   height: 117px;
 
   /* left align demandé */
-  text-align: left;
+  text-align: center;
 
   background: transparent;
   display: flex;
@@ -75,12 +75,12 @@ body {
 }
 
 #caster-one {
-  left: 235px;
-  top: 810px;
+  left: 305px;
+  top: 735px;
 }
 #caster-two {
-  left: 1018px;
-  top: 810px;
+  left: 1048px;
+  top: 735px;
   /* left align aussi (on supprime l'ancien mirror) */
   margin-left: 0;
   flex-direction: row-reverse;
@@ -107,6 +107,7 @@ body {
 }
 
 .social {
+  display: none;
   color: #1a1a1a;
   font-size: 25px;
   font-family: "Grotesk Medium";
