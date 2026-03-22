@@ -60,7 +60,7 @@
 
 /* ====== VARIABLES (typo / couleurs) ====== */
 :root{
-  --inkDark: #ffffff;
+  --inkDark: #f1f1f1;
 
   /* si tu as tes fonts locales, remplace ces familles */
   --fontTeam: "Nunito Sans", sans-serif;

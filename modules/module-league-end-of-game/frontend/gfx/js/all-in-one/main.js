@@ -35,12 +35,12 @@ function displayData(emdOfGameData) {
   const participants = state.participants
   displayDamageGraph(participants)
   displayGameTime(state.gameDuration)
-  if ( state?.featTeam ){
-    displayFeat(state.featTeamId)
-  } else {
-    const feat = document.getElementById("feat")
-    feat.style.display = "none"
-  }
+  // if ( state?.featTeam ){
+  //   displayFeat(state.featTeamId)
+  // } else {
+  //   const feat = document.getElementById("feat")
+  //   feat.style.display = "none"
+  // }
 
 }
 

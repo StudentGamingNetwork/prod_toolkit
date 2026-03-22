@@ -275,7 +275,7 @@ html, body {
   left: 0;
   height: 70%;
   width: var(--bar-width, 50%);
-  background: linear-gradient(to left, #2d86da 10%, #2d86da 40%, #2d86da 100%);  
+  background: linear-gradient(94deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
   border-radius: 3px;
   z-index: 1;
   transition: width 0.7s ease-out;
@@ -306,7 +306,7 @@ html, body {
   left: unset;
   width: var(--bar-width, 50%);
   border-radius: 3px;
-  background:linear-gradient(to left,  #9c0b89 ,#9c0b89);
+  background: linear-gradient(75deg,rgba(40, 35, 112, 1) 0%, rgba(37, 32, 89, 1) 28%, rgba(208, 206, 222, 1) 50%, rgba(37, 32, 89, 1) 76%, rgba(30, 10, 94, 1) 100%);
   position: absolute;
 }
 
@@ -442,20 +442,19 @@ html, body {
 background:linear-gradient(to left,  #fa270c ,#f34a34); */
 
 #blueTeamPicks {
-  background-image: linear-gradient(to right, #2d86da , #2d86da);;
+  background: linear-gradient(75deg,rgba(40, 35, 112, 1) 0%, rgba(37, 32, 89, 1) 28%, rgba(208, 206, 222, 1) 50%, rgba(37, 32, 89, 1) 76%, rgba(30, 10, 94, 1) 100%);
 }
 
 #redTeamPicks {
-  background-image: linear-gradient(to right,  #9c0b89 ,#9c0b89);
+  background: linear-gradient(75deg,rgba(40, 35, 112, 1) 0%, rgba(37, 32, 89, 1) 28%, rgba(208, 206, 222, 1) 50%, rgba(37, 32, 89, 1) 76%, rgba(30, 10, 94, 1) 100%);
 }
 
 #blueBan {
-  background: linear-gradient(to right, #2d86da 10%, #2d86da 40%, #2d86da 100%);
+  background: linear-gradient(94deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
 }
 #redBan {
-  background: linear-gradient(to left, #9c0b89 10%, #9c0b89 40%, #9c0b89 100%);
+  background: linear-gradient(233deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
 }
-
 .ban-grid {
   display: grid;
   grid-template-columns: repeat(3, 42px);
@@ -487,13 +486,11 @@ background:linear-gradient(to left,  #fa270c ,#f34a34); */
 }
 
 #blueTeamPicks {
-  background: linear-gradient(to left, #2d86da , #2d86da);
+  background: linear-gradient(176deg,rgba(223, 216, 235, 1) 0%, rgba(233, 225, 240, 1) 28%, rgba(212, 207, 232, 1) 61%, rgba(100, 0, 220, 1) 100%);
 }
-
-#redTeamPicks {
-  background: linear-gradient(to right, #9c0b89 ,#9c0b89);
+  #redTeamPicks {
+    background: linear-gradient(176deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
 }
-
 .pick-grid img {
   width: 50px;
   height: 50px;
