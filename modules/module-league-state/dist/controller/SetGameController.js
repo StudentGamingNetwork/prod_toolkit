@@ -69,7 +69,9 @@ class SetGameController extends Controller_1.Controller {
         else if (event.by === 'gameId') {
             if (!event.gameId) {
                 event.gameId = LeagueState_1.state.web.live.gameId;
+                // event.gameId = "7762070187"
             }
+            // else { event.gameId = "7762070187" }
             // Load game using plugin-webapi
             this.pluginContext.log.debug(`Loading match for gameId=${event.gameId}`);
             const gameResponse = await this.pluginContext.LPTE.request({

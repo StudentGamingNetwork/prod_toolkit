@@ -94,7 +94,8 @@ const formLoadByName = async () => {
 }
 
 const formLoadByGameId = async () => {
-  const gameId = document.querySelector('#gameid').value
+  // const gameId = document.querySelector('#gameid').value
+  const gameId = "EUW1_7761924446"
 
   await LPTE.request({
     meta: {
