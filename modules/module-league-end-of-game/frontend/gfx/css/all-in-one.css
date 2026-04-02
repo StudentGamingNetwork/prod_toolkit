@@ -104,7 +104,7 @@ html, body {
 .team.tag {
   font-size: 16px;
   font-style: italic;
-  color: #9c0b89;
+  color: #aa2389;
   font-weight: 600;
   opacity: 0.8;
   white-space: nowrap;
@@ -275,11 +275,25 @@ html, body {
   left: 0;
   height: 70%;
   width: var(--bar-width, 50%);
-  background: linear-gradient(94deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    #056b8f 0%,
+    #09a4d8 30%,
+    #4fd8ff 60%,
+    #4fd8ff 85%
+  );
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.1),
+    inset 0 -3px 6px rgba(0,0,0,0.05),
+    0 0 12px rgba(9, 164, 216, 0.6);
+
+  
   border-radius: 3px;
   z-index: 1;
   transition: width 0.7s ease-out;
 }
+
 
 /* Text value on top of the bar */
 .dmgContainer h3 {
@@ -306,7 +320,14 @@ html, body {
   left: unset;
   width: var(--bar-width, 50%);
   border-radius: 3px;
-  background: linear-gradient(75deg,rgba(40, 35, 112, 1) 0%, rgba(37, 32, 89, 1) 28%, rgba(208, 206, 222, 1) 50%, rgba(37, 32, 89, 1) 76%, rgba(30, 10, 94, 1) 100%);
+  background: linear-gradient(
+    -90deg,
+    #6f0f5b 0%,
+    #aa2389 30%,
+    #e45cc7 60%,
+    #e45cc7 85%
+  );
+  
   position: absolute;
 }
 
@@ -442,19 +463,43 @@ html, body {
 background:linear-gradient(to left,  #fa270c ,#f34a34); */
 
 #blueTeamPicks {
-  background: linear-gradient(75deg,rgba(40, 35, 112, 1) 0%, rgba(37, 32, 89, 1) 28%, rgba(208, 206, 222, 1) 50%, rgba(37, 32, 89, 1) 76%, rgba(30, 10, 94, 1) 100%);
-}
+  background: linear-gradient(
+    -90deg,
+    #066b8f 0%,
+    #09a4d8 60%,
+    #2fc2ee 100%
+  );
+  filter : drop-shadow(0px 2px 4px rgba(0, 0, 28, 0.5));
 
+}
 #redTeamPicks {
-  background: linear-gradient(75deg,rgba(40, 35, 112, 1) 0%, rgba(37, 32, 89, 1) 28%, rgba(208, 206, 222, 1) 50%, rgba(37, 32, 89, 1) 76%, rgba(30, 10, 94, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    #7a1863 0%,
+    #aa2389 60%,
+    #c93aa5 100%
+  );
+  filter : drop-shadow(0px 2px 4px rgba(0, 0, 28, 0.5));
+
 }
 
 #blueBan {
-  background: linear-gradient(94deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
+  background: linear-gradient(
+    -90deg,
+    #055a78 0%,
+    #09a4d8 50%,
+    #5fd8ff 100%
+  );
 }
 #redBan {
-  background: linear-gradient(233deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    #6a1455 0%,
+    #aa2389 50%,
+    #e052bb 100%
+  );
 }
+
 .ban-grid {
   display: grid;
   grid-template-columns: repeat(3, 42px);
@@ -485,12 +530,6 @@ background:linear-gradient(to left,  #fa270c ,#f34a34); */
   padding: 0 16px;
 }
 
-#blueTeamPicks {
-  background: linear-gradient(176deg,rgba(223, 216, 235, 1) 0%, rgba(233, 225, 240, 1) 28%, rgba(212, 207, 232, 1) 61%, rgba(100, 0, 220, 1) 100%);
-}
-  #redTeamPicks {
-    background: linear-gradient(176deg,rgba(100, 0, 220, 1) 0%, rgba(156, 102, 204, 1) 28%, rgba(104, 84, 184, 1) 61%, rgba(100, 0, 220, 1) 100%);
-}
 .pick-grid img {
   width: 50px;
   height: 50px;
