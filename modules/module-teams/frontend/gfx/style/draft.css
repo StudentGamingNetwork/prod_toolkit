@@ -169,6 +169,11 @@
 #red-name {
   margin-left: 0;
   text-align: right;
+  
+}
+
+#red-tag {
+  transform: translateX(30px);
 }
 
 .has-scores #blue-tag {
