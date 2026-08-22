@@ -1,172 +1,254 @@
+@font-face {
+  font-family: "Acumin VF";
+  src: url("./fonts/Acumin\ VF\ Default.ttf") format("truetype");
+  font-weight: 100 900;     /* plage VF */
+  font-stretch: 25% 125%;  /* condensed → extended */
+  font-style: normal italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Acumin Black";
+  src: url("./fonts/Acumin_Pro_ExtraCondensed_Black_Italic.otf");
+  font-weight: 100 900;     /* plage VF */
+  font-stretch: 25% 125%;  /* condensed → extended */
+  font-style: normal italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Text Pro";
+  src: url("./fonts/Neue\ Haas\ Grotesk\ Text\ Pro\ 75\ Bold.ttf") format("truetype");
+  font-weight: 100 900;     /* plage VF */
+  font-stretch: 25% 125%;  /* condensed → extended */
+  font-style: normal italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro 75 Bold";
+  src: url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.eot");
+  src: url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/0209bfe594ed24b75ee2aac06529e4f9.svg#Neue Haas Grotesk Display Pro 75 Bold")format("svg");
+}
+
+@font-face {
+  font-family: "Grotesk Compressed Extrabold";
+  src: url("./fonts/Kostic\ -\ Roc\ Grotesk\ Compressed\ ExtraBold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-@font-face {
-  font-family: "Coconat Bold";
-  src: url("./fonts/Coconat-BoldExt.woff"),
-       url("./fonts/Coconat-BoldExt.woff2");
-}
-@font-face {
-  font-family: "Coconat Regular";
-  src: url("./fonts/Coconat-Regular.woff"),
-       url("./fonts/Coconat-Regular.woff2");
-}
-@font-face {
-  font-family: "Murmure";
-  src: url("./fonts/LeMurmure-Regular.woff"),
-       url("./fonts/LeMurmure-Regular.woff2");
-}
-.module-teams-ingame-gfx {
+
+.module-teams-ingameBU-gfx{
   width: 1920px;
   height: 1080px;
-  overflow: hidden;
   position: relative;
-  font-family: "Coconat Bold", sans-serif;
-  font-size: 40px;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-variation-settings:
-    "wdth" 81.2;
-  font-weight: 700;
-  color: var(--text-color);
-  font-size: 50px;
-
+  overflow: hidden;
 }
 
-.blue {
-  color: white;
-  filter: drop-shadow(4px 4px 3px rgba(0,0,0,0.5));
-
+/* UI statique */
+#staticSB{
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  z-index: -1;
+  pointer-events: none;
 }
 
-.red {
-  color: white;
-  filter: drop-shadow(4px 4px 3px rgba(0,0,0,0.5));
+/* ====== VARIABLES (typo / couleurs) ====== */
+:root{
+  --inkDark: #2d2e2e;
 
+  /* si tu as tes fonts locales, remplace ces familles */
+  --fontTeam: "Grotesk Compressed Extrabold", sans-serif;
+  --fontStanding: "Grotesk Compressed Extrabold", sans-serif;
 }
 
-.team-containers {
-  width: 100%;
+/* ====== CONTENEUR SIDE ======
+   Largeur logique: 389 (car meta max à 339 + 50 = 389)
+*/
+.ingame-side{
+  position: absolute;
+  top: 0px;
+  width: 460px;
+  height: 62px;
+}
+
+/* Blue: ancré à gauche */
+.ingame-side--blue{
+  left: 35px;
+}
+
+/* Red: ancré à droite, layout miroir via positions internes */
+.ingame-side--red{
+  right: 35px;
+}
+
+/* ====== TEAM NAME (X255,Y0,W84,H62) ====== */
+.ingame-name{
+  position: absolute;
+  top: 5px;
+  width: 180px;
+  height: 62px;
+
   display: flex;
+  align-items: center;
+
+  color: var(--inkDark);
+  text-transform: uppercase;
+  line-height: 1;
+
+  /* garde le style “topbar-ish”, ajuste la taille si besoin */
+  font-family: "Grotesk Compressed Extrabold", sans-serif;
+
+  /* optionnel si la VF l’expose explicitement */
+  font-size: calc(38px);
+
+  color: var(--inkDark);
+  text-transform: uppercase;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.team-block {
+/* ====== META (X339,Y0,W50,H62) ====== */
+.ingame-meta{
+  position: absolute;
+  top: 0px;
+  width: 50px;
+  height: 62px;
+
   display: flex;
-  flex-direction: row;
-  align-items: left;
-  width: 50%;
-  gap: 7px;
-  max-height: 75px;
+  flex-direction: column;
+
+  justify-content: center;   /* centre globalement dans les 62px */
+  align-items: center;
+
+  gap: 4px;                  /* <-- rapproche, ajuste 0–6px */
 }
 
-.team-block.red {
-  right:0;
-  flex-direction: row-reverse;
+.ingame-standing{
+  font-family: var(--fontStanding);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--inkDark);
 }
 
-.team-block.red .info-column {
-  align-items: flex-end;
-  text-align: right;
+.ingame-bo{
+  width: 60px;
+  height: 60px;
+  /* object-fit: contain; */
+  display: block;
 }
-
-.team-block.red .tag {
-  text-align: right;
-}
-
-.logo-container {
-  width: 75px;
-  height: 75px;
+.bo-crop{
+  width: 50px;      /* largeur du bloc meta */
+  height: 18px;     /* hauteur utile du contenu BO (à ajuster) */
+  /*overflow: hidden;  <-- on coupe l’alpha autour */
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+  left: 50px;        /* décale le score BO vers la droite */
 }
 
-.logo {
-  max-width: 65px;
-  max-height: 65px;
-  width: auto;
+.ingame-bo{
+  width: 60px;      /* tu peux laisser plus grand */
   height: auto;
-  object-fit: contain;
-}
-
-.info-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 75px;
-  margin-top: 7px;
-}
-
-/* Common font + overflow settings */
-.name, .tag {
-  text-transform:uppercase;
-  font-family: "Coconat Bold", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  /* font-style: italic; */
-  font-variation-settings: "wdth" 81.2;
-  align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-}
-
-
-/* Team name */
-.name {
-  height: 44px;
-  line-height: 1;
-  max-width: 250px;
-  font-size: 18px;
-  color: black;
-
-  display: flex;
-  align-items: center; /* <-- vertical centering */
-  text-align: left;
-}
-
-/* Team tag */
-.tag {
-  height: 24px;
-  line-height: 24px;
-  max-width: 100px;
-  padding: 0 6px;
-  font-size: 24px;
-  color: black;
-}
-
-.red{
-  text-align: right;
-}
-
-.points-team {
-  z-index: 15;
-  width: 1920px;
-  height: 20%;
-  position: absolute;
-  top:81px;
-  display: flex;
-}
-
-.points-blue{
-  position: absolute;
-  left: 8px;
-}
-.points-red{
-  flex-direction: row-reverse;
-  position: absolute;
-  right:-2px;
-}
-.point {
   display: block;
-  width: 47px;
-  height: 7px;
-  margin-right: 10px;
-  border-radius: 30px 5px 30px 5px;
+
+  /* optionnel : recentrer si ton contenu est trop haut/bas dans le PNG */
+  transform: translateY(-2px) scale(1.05);
 }
-.point-red{
-  border-radius: 5px 30px 5px 30px ;
+/* ====== “No BO” => standings centré verticalement ====== */
+.ingame-side[data-has-bo="0"] .ingame-meta{
+  justify-content: center;
+  gap: 0;
 }
+.ingame-side[data-has-bo="0"] .ingame-bo{
+  display: none;
+}
+
+/* ====== POSITIONS EXACTES (BLUE) ====== */
+.ingame-side--blue .ingame-name{ left: 255px; }
+.ingame-side--blue .ingame-meta{ left: 339px; }
+.ingame-side--blue .ingame-name{ text-align: left; }
+
+/* ====== POSITIONS EXACTES (RED miroir) ======
+   Largeur = 389
+   nameX = 389 - 255 - 84 = 50
+   metaX = 389 - 339 - 50 = 0
+*/
+.ingame-side--red .ingame-name{ left: 60px; }
+.ingame-side--red .ingame-meta{ left: 0px; }
+.ingame-side--red .ingame-name{
+  justify-content: flex-end;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.team-logo-bottom{
+  position: absolute;
+  width: 274px;
+  height: 195px;
+
+  padding: 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.team-logo-bottom img{
+  height: 110%;        /* 🔥 prend toute la hauteur utile */
+  width: auto;         /* respecte le ratio */
+  max-width: 100%;     /* ne déborde jamais en largeur */
+
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(5px 5px 15px #1a1a1a);
+
+}
+
+.team-logo-bottom--blue{
+  left: 307px;
+  top: 875px;
+}
+
+.team-logo-bottom--red{
+  left: 1353px;
+  top: 875px;
+}
+
+
+/* .team-logo-bottom--blue{
+  left: 320px;
+  top: 875px;
+}
+
+.team-logo-bottom--red{
+  left: 1343px;
+  top: 875px;
+} */
+
+.team-logo-bottom img{
+  transform: scale(1.05);
+}
+

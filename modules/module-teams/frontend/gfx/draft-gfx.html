@@ -38,9 +38,7 @@
           <div class="logo-circle">
             <img id="blue-logo" class="logo" src="../img/Mandragora.png" alt="">
           </div>
-          <div class="pips" id="blue-pips">
-            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
-          </div>
+          <div class="pips" id="blue-pips"></div>
         </div>
       </div>
     
@@ -53,9 +51,7 @@
           <div class="logo-circle">
             <img id="red-logo" class="logo" src="../img/Pandore.png" alt="">
           </div>
-          <div class="pips" id="red-pips">
-            <span class="pip"></span><span class="pip"></span><span class="pip"></span>
-          </div>
+          <div class="pips" id="red-pips"></div>
         </div>
         <div id="red-name" class="team-name"></div>
         <div id="red-score" class="score sr-only">2</div>
@@ -70,33 +66,5 @@
     <!-- <img src="./img/Screenshot 2025-09-22 13-47-38.png" alt="" id="staticSB" style="position: absolute;z-index: -1;overflow: hidden; top: 0;"> -->
 
     <script src="js/draft.js" defer></script>
-    <script>
-      function updatePips(team) {
-        const scoreEl = document.getElementById(`${team}-score`);
-        const pips = document.querySelectorAll(`#${team}-pips .pip`);
-        if (!scoreEl) return;
-      
-        const score = parseInt(scoreEl.textContent.trim(), 10) || 0;
-      
-        pips.forEach((pip, i) => {
-          if (i < score) {
-            pip.classList.add("filled");
-          } else {
-            pip.classList.remove("filled");
-          }
-        });
-      }
-      
-      // maj des 2 équipes
-      function refreshAllPips() {
-        updatePips("blue");
-        updatePips("red");
-      }
-      
-      // premier rendu
-      refreshAllPips();
-      
-      // si tes scores changent via JS, rappelle refreshAllPips()
-      </script>  
     </body>
 </html>

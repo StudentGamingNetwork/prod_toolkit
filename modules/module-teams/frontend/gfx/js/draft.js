@@ -51,24 +51,21 @@ window.LPTE.onready(() => {
 })
 
 function updatePips(bestOf, team, score){
-  const pips = document.querySelectorAll(`#${team}-pips .pip`);
-  pipblue_div = document.querySelector(`#blue-pips`)
-  pipred_div = document.querySelector(`#red-pips`)
+  const container = document.querySelector(`#${team}-pips`);
 
-  pips.forEach((pip, i) => {
-    if (bestOf > 1){
-      pipblue_div.style.diplay = 'flex'
-      pipred_div.style.diplay = 'flex'
-      if (i < score) {
-        pip.classList.add("filled");
-      } else {
-        pip.classList.remove("filled");
-      }
-    } else {
-      pipblue_div.style.display = 'none'
-      pipred_div.style.display = 'none'
+  if (bestOf > 1) {
+    const pointsToWin = Math.floor(bestOf / 2) + 1
+    container.style.display = 'flex'
+    container.innerHTML = ''
+    for (let i = 0; i < pointsToWin; i++) {
+      const pip = document.createElement('span');
+      pip.classList.add('pip');
+      if (i < score) pip.classList.add('filled');
+      container.appendChild(pip);
     }
-    });
+  } else {
+    container.style.display = 'none'
+  }
 }
 
 function displayTeams(teams, bestOf) {

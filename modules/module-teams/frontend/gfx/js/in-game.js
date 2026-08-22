@@ -1,14 +1,20 @@
-const namespace = 'module-teams'
+const namespace = 'module-teams';
+const blueLogo = document.getElementById('blue-logo-big');
+const redLogo  = document.getElementById('red-logo-big');
 
-const blueTag = document.querySelector('#blue-tag')
-const redTag = document.querySelector('#red-tag')
+const blueRoot = document.getElementById('ingame-blue');
+const redRoot  = document.getElementById('ingame-red');
 
-const pointContainer = document.querySelector('#point-container')
-const blueName = document.querySelector('#blue-name')
-const redName = document.querySelector('#red-name')
+const blueName = document.getElementById('blue-name');
+const redName  = document.getElementById('red-name');
 
-const blueLogo = document.querySelector('#logo-blue')
-const redLogo = document.querySelector('#logo-red')
+const blueStanding = document.getElementById('blue-standing');
+const redStanding  = document.getElementById('red-standing');
+
+const blueBo = document.getElementById('blue-bo'); // <img>
+const redBo  = document.getElementById('red-bo');  // <img>
+
+const staticSB = document.getElementById('staticSB');
 
 const tick = async () => {
   const data = await this.LPTE.request({
@@ -22,6 +28,7 @@ const tick = async () => {
   if (data.state === 'READY') {
     displayTeams(data.teams, data.bestOf)
   } else {
+    tagContainer.style.display = 'none'
     pointContainer.style.display = 'none'
   }
 }
@@ -30,6 +37,7 @@ const update = (data) => {
   if (data.state === 'READY') {
     displayTeams(data.teams, data.bestOf)
   } else {
+    tagContainer.style.display = 'none'
     pointContainer.style.display = 'none'
   }
 }
@@ -39,93 +47,83 @@ window.LPTE.onready(() => {
   window.LPTE.on(namespace, 'update', update)
 })
 
-function displayTeams(teams, bestOf) {
-  pointContainer.style.display = 'flex'
+function setBo3Image(imgEl, side, score) {
+  // side = "left" | "right"
+  const file = `${side}_${score}.png`;
 
-  if (bestOf > 1) {
-    document.body.classList.add('has-scores')
-    pointContainer.style.display = 'flex'
-  } else {
-    document.body.classList.remove('has-scores')
-    pointContainer.style.display = 'none'
-  }
+  // même logique que tes logos: dossier img servi avec la page
+  const url = `../img/${file}`;
 
+  imgEl.src = url;
 
-  // Set point visibility if required
-  const pointsToWin = Math.ceil(bestOf / 2)
-  for (let i = 0; i < 5; i++) {
-    const point = i + 1
-
-    const setTeamPoints = (teamName, teamData) => {
-      const selector = document.getElementById(`point-${teamName}-${point}`)
-      if (teamData.score >= point) {
-        // Point scored, make visible
-        selector.style.display = 'flex'
-        selector.style.backgroundImage = 'linear-gradient(45deg, #000 0%, #AAA 30%, #000 75%, #AAA 100%)';
-        selector.classList.remove('empty')
-      } else {
-        // is this point possible to make?
-        if (point > pointsToWin) {
-          // no, completely not display
-          selector.style.display = 'none'
-          // selector.style.visibility = 'unset'
-          selector.classList.remove('empty')
-        } else {
-          // yes, only soft hide
-          // selector.style.visibility = 'hidden'
-          selector.style.display = 'flex'
-          selector.style.backgroundImage = 'linear-gradient(45deg, #FFF 0%, #AAA 30%, #FFF 75%, #AAA 100%)';
-          selector.classList.add('empty')
-        }
-      }
-    }
-
-    setTeamPoints('blue', teams.blueTeam)
-    setTeamPoints('red', teams.redTeam)
-  }
-
-  if (teams.blueTeam.color !== '#000000') {
-    document
-      .querySelector('.module-teams-ingame-gfx')
-      .style.setProperty('--blue-team', '#ffffff')
-  } else {
-    document
-      .querySelector('.module-teams-ingame-gfx')
-      .style.removeProperty('--blue-team')
-  }
-  if (teams.redTeam.color !== '#000000') {
-    document
-      .querySelector('.module-teams-ingame-gfx')
-      .style.setProperty('--red-team', '#ffffff')
-  } else {
-    document
-      .querySelector('.module-teams-ingame-gfx')
-      .style.removeProperty('--red-team')
-  }
-
-  blueTag.innerHTML = teams.blueTeam.tag
-  redTag.innerHTML = teams.redTeam.tag
-  blueName.innerHTML = teams.blueTeam.name
-  // resizeText(blueName)
-  redName.innerHTML = teams.redTeam.name
-  // resizeText(redName)
-  blueLogo.src = '../img/' + teams.blueTeam.logo
-  redLogo.src = '../img/' + teams.redTeam.logo
+  // debug utile si ça 404
+  imgEl.onerror = () => {
+    console.warn(`[BO IMG] not found: ${url}`);
+    imgEl.onerror = null;
+    imgEl.src = `../img/${side}_0.png`; // fallback
+  };
 }
 
-const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
+function setBo5Image(imgEl, side, score) {
+  // side = "left" | "right"
+  const file = `${side}_${score}3.png`;
 
-// const resizeText = (parent) => {
-//   let i = 15 // let's start with 12px
-//   let overflow = false
-//   const maxSize = 23 // very huge text size
+  // même logique que tes logos: dossier img servi avec la page
+  const url = `../img/${file}`;
 
-//   while (!overflow && i < maxSize) {
-//     parent.style.fontSize = `${i}px`
-//     overflow = isOverflown(parent)
-//     if (!overflow) i++
-//   }
+  imgEl.src = url;
 
-//   // revert to last state where no overflow happened:
-//   parent.style.fontSize = `${i - 1}px`
-// }
+  // debug utile si ça 404
+  imgEl.onerror = () => {
+    console.warn(`[BO IMG] not found: ${url}`);
+    imgEl.onerror = null;
+    imgEl.src = `../img/${side}_0.png`; // fallback
+  };
+}
+
+function setHasBo(rootEl, hasBo) {
+  rootEl.dataset.hasBo = hasBo ? '1' : '0';
+}
+
+function displayTeams(teams, bestOf) {
+  // Texte
+  blueName.textContent = teams.blueTeam?.name ?? '';
+  redName.textContent  = teams.redTeam?.name ?? '';
+
+  blueStanding.textContent = teams.blueTeam?.standing ?? '';
+  redStanding.textContent  = teams.redTeam?.standing ?? '';
+  blueLogo.src = "../img/" + teams.blueTeam.logo
+  redLogo.src = "../img/" + teams.redTeam.logo
+  const hasBo = bestOf > 1;
+
+  setHasBo(blueRoot, hasBo);
+  setHasBo(redRoot, hasBo);
+
+
+  // Images BO
+  if (hasBo) {
+    if (bestOf > 3) {
+      setBo5Image(blueBo, 'left', teams.blueTeam?.score ?? 0);
+      setBo5Image(redBo, 'right', teams.redTeam?.score ?? 0);
+    }
+    else if (bestOf > 1) {
+      setBo3Image(blueBo, 'left', teams.blueTeam?.score ?? 0);
+      setBo3Image(redBo, 'right', teams.redTeam?.score ?? 0);
+    }
+  }
+}const isOverflown = ({ clientWidth, scrollWidth }) => scrollWidth > clientWidth
+
+const resizeText = (parent) => {
+  let i = 15 // let's start with 12px
+  let overflow = false
+  const maxSize = 23 // very huge text size
+
+  while (!overflow && i < maxSize) {
+    parent.style.fontSize = `${i}px`
+    overflow = isOverflown(parent)
+    if (!overflow) i++
+  }
+
+  // revert to last state where no overflow happened:
+  parent.style.fontSize = `${i - 1}px`
+}
